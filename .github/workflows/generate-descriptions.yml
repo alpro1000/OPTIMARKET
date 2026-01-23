@@ -15,11 +15,10 @@ jobs:
       - name: Install deps
         run: npm install
       - name: Generate Descriptions
-        run: node scripts/generateDescriptions.js
+        run: node generateDescriptions.js
         env:
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: gpt-5-turbo
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Commit Results
         run: |
           if git diff --quiet; then
