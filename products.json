@@ -1,0 +1,23 @@
+[
+  {
+    "id": "bosch_gsr_18v",
+    "name": "Bosch GSR 18V-110",
+    "category": "drill",
+    "tier": "Premium",
+    "query": "Bosch GSR 18V-110 professional reviews 2025"
+  },
+  {
+    "id": "makita_hr2470",
+    "name": "Makita HR2470",
+    "category": "drill",
+    "tier": "Optimum",
+    "query": "Makita HR2470 expert tests 2025"
+  },
+  {
+    "id": "einhell_tc_rh_800",
+    "name": "Einhell TC-RH 800",
+    "category": "drill",
+    "tier": "Economy",
+    "query": "Einhell TC-RH 800 user reviews 2025"
+  }
+]

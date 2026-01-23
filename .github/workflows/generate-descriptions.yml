@@ -1,0 +1,33 @@
+name: AI Product Descriptions
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm install
+      - name: Generate Descriptions
+        run: node scripts/generateDescriptions.js
+        env:
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5-turbo
+      - name: Commit Results
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config --global user.name 'OptiBot'
+          git config --global user.email 'bot@optimarket.ai'
+          git add descriptions.json
+          git commit -m "AI update: refreshed descriptions"
+          git push
