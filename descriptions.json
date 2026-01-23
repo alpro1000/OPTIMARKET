@@ -1,0 +1,17 @@
+[
+  {
+    "id": "bosch_gsr_18v",
+    "tier": "Premium",
+    "description": "Bosch GSR 18V-110 stands out for its industrial-grade torque, long battery life, and solid housing. Professional reviewers praise its consistency under load and 3-year warranty, making it ideal for daily, demanding use."
+  },
+  {
+    "id": "makita_hr2470",
+    "tier": "Optimum",
+    "description": "Makita HR2470 delivers balanced power and durability for mid-range users. It offers smooth drilling and quick bit changes, earning high marks for value and simplicity in expert tests."
+  },
+  {
+    "id": "einhell_tc_rh_800",
+    "tier": "Economy",
+    "description": "Einhell TC-RH 800 is the practical choice for occasional tasks. Users highlight its low price and acceptable performance, though noise and longevity are moderate compared to premium models."
+  }
+]
