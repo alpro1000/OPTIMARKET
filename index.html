@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OPTIMARKET — умный выбор Premium / Optimum / Economy</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <div class="brand">
+          <span class="brand-mark">O</span>
+          <div>
+            <h1>OPTIMARKET</h1>
+            <p>ИИ‑куратор выбора: премиум, оптимум, эконом</p>
+          </div>
+        </div>
+        <button class="ghost-button">Запросить подбор</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">MVP · Инструменты и электроника для дома</p>
+            <h2>Три решения вместо бесконечного каталога</h2>
+            <p class="hero-text">
+              Мы собираем реальные характеристики, цены и отзывы, затем объясняем разницу между
+              моделями и показываем 3 уровня выбора. Всё прозрачно, без склада и логистики.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-button">Посмотреть подбор</button>
+              <button class="secondary-button">Как это работает</button>
+            </div>
+            <div class="hero-metrics">
+              <div>
+                <strong>24h</strong>
+                <span>обновление каталога</span>
+              </div>
+              <div>
+                <strong>3 уровня</strong>
+                <span>Premium / Optimum / Economy</span>
+              </div>
+              <div>
+                <strong>LLM‑объяснение</strong>
+                <span>прозрачные причины выбора</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <h3>Как подбираем товары</h3>
+            <ul>
+              <li>Собираем характеристики и отзывы из партнёрских источников.</li>
+              <li>Считаем скоринг «цена × качество × надёжность».</li>
+              <li>Выбираем три уровня и объясняем ключевые различия.</li>
+            </ul>
+            <div class="hero-card-footer">
+              <span>Без рекламы — только объяснения.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="selection">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">MVP‑витрина</p>
+              <h2>Аккумуляторные дрели</h2>
+              <p class="section-text">
+                Пример подборки по нише DIY/ремонт: 3 уровня выбора и короткие объяснения.
+              </p>
+            </div>
+            <div class="filters">
+              <label>
+                Ниша
+                <select>
+                  <option>DIY и ремонт</option>
+                  <option disabled>Умный дом</option>
+                  <option disabled>Кухонная техника</option>
+                </select>
+              </label>
+              <label>
+                Цель
+                <select>
+                  <option>Домашний мастер</option>
+                  <option disabled>Профи‑бригада</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div id="product-grid" class="product-grid"></div>
+        </div>
+      </section>
+
+      <section class="insights">
+        <div class="container insights-grid">
+          <div>
+            <h2>LLM‑объяснение выбора</h2>
+            <p class="section-text">
+              Каждая рекомендация сопровождается кратким разбором: почему этот товар попал в
+              уровень, какие компромиссы и какие слабые места нашли в отзывах.
+            </p>
+            <div class="insight-cards">
+              <article>
+                <h3>Premium</h3>
+                <p>Максимальная надёжность и ресурс, готов к интенсивной работе.</p>
+              </article>
+              <article>
+                <h3>Optimum</h3>
+                <p>Лучшее соотношение цены и возможностей, баланс для большинства задач.</p>
+              </article>
+              <article>
+                <h3>Economy</h3>
+                <p>Базовые задачи без переплаты, честные ограничения и бюджетные решения.</p>
+              </article>
+            </div>
+          </div>
+          <div class="insight-panel">
+            <h3>PRIE: обзоры и отзывы</h3>
+            <p>
+              Мы агрегируем мнения из тестов и отзывов, выделяем плюсы/минусы и выдаём
+              компактную экспертную сводку.
+            </p>
+            <ul>
+              <li>Источники: Amazon, TechRadar, локальные маркетплейсы.</li>
+              <li>Сигналы: частота поломок, эргономика, стабильность цены.</li>
+              <li>Финальный вывод в 4‑5 строк.</li>
+            </ul>
+            <button class="secondary-button">Посмотреть пример отчёта</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="roadmap">
+        <div class="container">
+          <h2>Запуск MVP за 60 дней</h2>
+          <div class="roadmap-grid">
+            <div>
+              <span>01</span>
+              <h3>Партнёрки</h3>
+              <p>Подключаем Awin, Admitad, Amazon, Heureka.</p>
+            </div>
+            <div>
+              <span>02</span>
+              <h3>Каталог</h3>
+              <p>Собираем 10–15 товаров и нормализуем характеристики.</p>
+            </div>
+            <div>
+              <span>03</span>
+              <h3>Прототип</h3>
+              <p>Витрина Web + Telegram mini‑бот.</p>
+            </div>
+            <div>
+              <span>04</span>
+              <h3>LLM</h3>
+              <p>Интеграция GPT‑5 и Perplexity для объяснений.</p>
+            </div>
+            <div>
+              <span>05</span>
+              <h3>Тест трафика</h3>
+              <p>Проверяем гипотезы через сообщества и YouTube.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h3>OPTIMARKET</h3>
+          <p>Прозрачный выбор товаров с объяснениями от ИИ.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Affiliate</p>
+          <p>Переходы по партнёрским ссылкам поддерживают проект.</p>
+        </div>
+        <button class="primary-button">Получить подбор</button>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
