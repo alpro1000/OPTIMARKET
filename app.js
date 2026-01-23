@@ -45,10 +45,32 @@ const renderCard = (item) => {
   `;
 };
 
+const getCategoryName = () =>
+  document.querySelector(".selection h2")?.textContent?.trim();
+
+const resolveItems = (data) => {
+  if (Array.isArray(data)) {
+    const categoryName = getCategoryName();
+    const category =
+      data.find((entry) => entry.category === categoryName) || data[0];
+    return category?.items ?? [];
+  }
+
+  return data?.items ?? [];
+};
+
 fetch("data/products.json")
   .then((response) => response.json())
   .then((data) => {
-    grid.innerHTML = data.items.map(renderCard).join("");
+    const items = resolveItems(data);
+
+    if (!items.length) {
+      grid.innerHTML =
+        "<p class=\"section-text\">Подборка пока недоступна.</p>";
+      return;
+    }
+
+    grid.innerHTML = items.map(renderCard).join("");
   })
   .catch(() => {
     grid.innerHTML =
