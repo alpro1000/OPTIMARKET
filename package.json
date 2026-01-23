@@ -2,11 +2,15 @@
   "name": "optimarket-ai-description-engine",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "generate:descriptions": "node scripts/generateDescriptions.js"
+    "generate:descriptions": "node generateDescriptions.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.18.0",
+    "node-fetch": "^3.3.2"
   }
 }

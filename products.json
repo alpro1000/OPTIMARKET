@@ -1,23 +1,20 @@
 [
   {
     "id": "bosch_gsr_18v",
-    "name": "Bosch GSR 18V-110",
-    "category": "drill",
+    "name": "Bosch GSR 18V-110 Professional",
     "tier": "Premium",
-    "query": "Bosch GSR 18V-110 professional reviews 2025"
+    "query": "Bosch GSR 18V-110 Professional reviews 2025 site:amazon.com OR site:wirecutter.com"
   },
   {
     "id": "makita_hr2470",
-    "name": "Makita HR2470",
-    "category": "drill",
+    "name": "Makita HR2470 Rotary Hammer",
     "tier": "Optimum",
-    "query": "Makita HR2470 expert tests 2025"
+    "query": "Makita HR2470 expert tests 2025 site:trustpilot.com OR site:tooladvice.net"
   },
   {
     "id": "einhell_tc_rh_800",
-    "name": "Einhell TC-RH 800",
-    "category": "drill",
+    "name": "Einhell TC-RH 800 E Hammer Drill",
     "tier": "Economy",
-    "query": "Einhell TC-RH 800 user reviews 2025"
+    "query": "Einhell TC-RH 800 E user reviews 2025 site:amazon.de OR site:reviewmeta.com"
   }
 ]
