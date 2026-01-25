@@ -7,10 +7,9 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "generate:descriptions": "node generateDescriptions.js"
+    "run:mvp": "node runMVP.js"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.18.0",
     "node-fetch": "^3.3.2"
   }
 }
