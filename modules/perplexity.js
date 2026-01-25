@@ -1,10 +1,10 @@
 import fetch from "node-fetch";
 
 /**
- * Fetches real review snippets and expert tests from the web
- * using Perplexity API (required component).
+ * Fetch real review & test snippets from the web.
+ * This is the ONLY allowed source of factual information.
  */
-export async function fetchReviews(query) {
+export async function fetchReviewSnippets(query) {
   console.log(`📡 Perplexity API: searching for "${query}"`);
 
   const res = await fetch("https://api.perplexity.ai/search", {
@@ -15,7 +15,7 @@ export async function fetchReviews(query) {
     },
     body: JSON.stringify({
       query,
-      num_results: 5,
+      num_results: 8,
       focus: "reviews"
     })
   });
@@ -26,8 +26,12 @@ export async function fetchReviews(query) {
   }
 
   const data = await res.json();
-  const snippets = data.results?.map((result) => result.snippet).join("\n");
+  const snippets = (data.results || []).map((result) => ({
+    title: result.title,
+    snippet: result.snippet,
+    source: result.url
+  }));
 
-  console.log("✅ Perplexity API: received response");
-  return snippets || "No reviews found.";
+  console.log(`✅ Perplexity API: received ${snippets.length} snippets`);
+  return snippets;
 }
