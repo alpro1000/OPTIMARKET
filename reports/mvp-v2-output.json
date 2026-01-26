@@ -1,0 +1,1349 @@
+{
+  "pipeline_version": "2.0",
+  "generated_at": "2026-01-26T12:16:45.697Z",
+  "categories_processed": 4,
+  "supported_category_signals": [
+    "drill",
+    "headphones",
+    "laptop",
+    "phone"
+  ],
+  "results": [
+    {
+      "category": "Аккумуляторные дрели",
+      "category_key": "drill",
+      "generated_at": "2026-01-26T12:16:45.670Z",
+      "items_count": 3,
+      "choices": {
+        "economy": {
+          "product": "Einhell TE-CD 18/2",
+          "price": "99€",
+          "price_value": 99,
+          "value_score": 7.8,
+          "level": "Economy",
+          "specs": {
+            "Крутящий момент": "44 Н·м",
+            "Аккумулятор": "18V 2.0Ah",
+            "Вес": "1.7 кг"
+          },
+          "pros": [
+            "лёгкий корпус",
+            "доступный сервис"
+          ],
+          "cons": [
+            "меньший ресурс",
+            "простая электроника"
+          ],
+          "signals": {
+            "positive_mentions": 22,
+            "negative_mentions": 9,
+            "trust_score": 2.916682087057307,
+            "category_signals": {},
+            "sentiment_ratio": 0.65
+          },
+          "explanation": {
+            "why": "Einhell TE-CD 18/2 находится на уровне Economy на основе анализа 31 отзывов.",
+            "tradeoffs": [
+              "Цена: 99€",
+              "Отзывы: 22 положительных, 9 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории drill."
+          }
+        },
+        "optimum": {
+          "product": "Makita DDF484",
+          "price": "169€",
+          "price_value": 169,
+          "value_score": 8.9,
+          "level": "Optimum",
+          "specs": {
+            "Крутящий момент": "54 Н·м",
+            "Аккумулятор": "18V 3.0Ah",
+            "Вес": "1.8 кг"
+          },
+          "pros": [
+            "эргономика",
+            "надёжный редуктор"
+          ],
+          "cons": [
+            "нет быстрой зарядки",
+            "шумнее премиум сегмента"
+          ],
+          "signals": {
+            "positive_mentions": 33,
+            "negative_mentions": 6,
+            "trust_score": 3.3443495005615214,
+            "category_signals": {},
+            "sentiment_ratio": 0.85
+          },
+          "explanation": {
+            "why": "Makita DDF484 находится на уровне Optimum на основе анализа 39 отзывов.",
+            "tradeoffs": [
+              "Цена: 169€",
+              "Отзывы: 33 положительных, 6 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории drill."
+          }
+        },
+        "premium": {
+          "product": "Bosch GSR 18V-110",
+          "price": "249€",
+          "price_value": 249,
+          "value_score": 9.4,
+          "level": "Premium",
+          "specs": {
+            "Крутящий момент": "110 Н·м",
+            "Аккумулятор": "18V 5.0Ah",
+            "Вес": "2.1 кг"
+          },
+          "pros": [
+            "металлический патрон",
+            "точная электроника"
+          ],
+          "cons": [
+            "высокая цена",
+            "требует запасной аккумулятор"
+          ],
+          "signals": {
+            "positive_mentions": 45,
+            "negative_mentions": 4,
+            "trust_score": 3.9086332246219238,
+            "category_signals": {},
+            "sentiment_ratio": 0.93
+          },
+          "explanation": {
+            "why": "Bosch GSR 18V-110 находится на уровне Premium на основе анализа 49 отзывов.",
+            "tradeoffs": [
+              "Цена: 249€",
+              "Отзывы: 45 положительных, 4 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории drill."
+          }
+        }
+      },
+      "tradeoffs": {
+        "economyVsOptimum": {
+          "priceDiff": "+70€",
+          "valueGain": "Makita DDF484 предлагает улучшенные характеристики",
+          "breakEven": "Для регулярного использования"
+        },
+        "optimumVsPremium": {
+          "priceDiff": "+80€",
+          "valueGain": "Bosch GSR 18V-110 обеспечивает максимальную надежность",
+          "breakEven": "Для профессионального использования"
+        }
+      },
+      "value_curve": {
+        "statistics": {
+          "minPrice": 99,
+          "maxPrice": 249,
+          "minValue": 7.8,
+          "maxValue": 9.4,
+          "avgPrice": 172.33333333333334,
+          "avgValue": 8.700000000000001
+        },
+        "inflection_point": {
+          "product": "Makita DDF484",
+          "price": 169,
+          "value_score": 8.9,
+          "efficiencyDrop": 0.026125156894387658,
+          "explanation": "После Einhell TE-CD 18/2 (99€) эффективность затрат падает на 2.6%"
+        },
+        "explanations": {
+          "overview": "Проанализировано 3 товаров. Узкий диапазон цен (99-249€). Товары примерно одинакового качества (7.8-9.4/10).",
+          "inflection": "Перегиб кривой: После Einhell TE-CD 18/2 (99€) эффективность затрат падает на 2.6%. После этой точки каждый дополнительный евро дает меньше ценности.",
+          "sweetSpot": "Лучшее соотношение цена/ценность: Einhell TE-CD 18/2 (99€, 7.9% value per €)",
+          "choices": {
+            "economy": "Economy (Einhell TE-CD 18/2, 99€): минимальная цена при достаточной ценности (7.8/10)",
+            "optimum": "Optimum (Makita DDF484, 169€): оптимальный баланс (8.9/10, NaN% value per €)",
+            "premium": "Premium (Bosch GSR 18V-110, 249€): максимальная ценность (9.4/10) для требовательных пользователей"
+          }
+        },
+        "chart_data": {
+          "datasets": [
+            {
+              "label": "Другие товары",
+              "data": [],
+              "backgroundColor": "rgba(150, 150, 150, 0.3)",
+              "borderColor": "rgba(150, 150, 150, 0.8)",
+              "borderWidth": 1,
+              "pointRadius": 4,
+              "pointHoverRadius": 6
+            },
+            {
+              "label": "💚 Economy: Einhell TE-CD 18/2",
+              "data": [
+                {
+                  "x": 99,
+                  "y": 7.8
+                }
+              ],
+              "backgroundColor": "rgba(34, 197, 94, 0.8)",
+              "borderColor": "rgba(34, 197, 94, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💙 Optimum: Makita DDF484",
+              "data": [
+                {
+                  "x": 169,
+                  "y": 8.9
+                }
+              ],
+              "backgroundColor": "rgba(59, 130, 246, 0.8)",
+              "borderColor": "rgba(59, 130, 246, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💛 Premium: Bosch GSR 18V-110",
+              "data": [
+                {
+                  "x": 249,
+                  "y": 9.4
+                }
+              ],
+              "backgroundColor": "rgba(234, 179, 8, 0.8)",
+              "borderColor": "rgba(234, 179, 8, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            }
+          ],
+          "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "plugins": {
+              "title": {
+                "display": true,
+                "text": "Кривая \"Цена ↔ Ценность\"",
+                "font": {
+                  "size": 18,
+                  "weight": "bold"
+                }
+              },
+              "legend": {
+                "display": true,
+                "position": "bottom"
+              },
+              "tooltip": {
+                "callbacks": {}
+              }
+            },
+            "scales": {
+              "x": {
+                "type": "linear",
+                "position": "bottom",
+                "title": {
+                  "display": true,
+                  "text": "Цена (€)",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "ticks": {}
+              },
+              "y": {
+                "type": "linear",
+                "title": {
+                  "display": true,
+                  "text": "Value Score",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "max": 10,
+                "ticks": {
+                  "stepSize": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "all_items": [
+        {
+          "level": "Premium",
+          "product": "Bosch GSR 18V-110",
+          "price": "249€",
+          "summary": "Для профессиональных задач, максимальный ресурс и защита.",
+          "score": "9.4",
+          "specs": {
+            "Крутящий момент": "110 Н·м",
+            "Аккумулятор": "18V 5.0Ah",
+            "Вес": "2.1 кг"
+          },
+          "pros": [
+            "металлический патрон",
+            "точная электроника"
+          ],
+          "cons": [
+            "высокая цена",
+            "требует запасной аккумулятор"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=bosch",
+          "price_value": 249,
+          "value_score": 9.4
+        },
+        {
+          "level": "Optimum",
+          "product": "Makita DDF484",
+          "price": "169€",
+          "summary": "Лучший баланс цены и мощности для мастера.",
+          "score": "8.9",
+          "specs": {
+            "Крутящий момент": "54 Н·м",
+            "Аккумулятор": "18V 3.0Ah",
+            "Вес": "1.8 кг"
+          },
+          "pros": [
+            "эргономика",
+            "надёжный редуктор"
+          ],
+          "cons": [
+            "нет быстрой зарядки",
+            "шумнее премиум сегмента"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=makita",
+          "price_value": 169,
+          "value_score": 8.9
+        },
+        {
+          "level": "Economy",
+          "product": "Einhell TE-CD 18/2",
+          "price": "99€",
+          "summary": "Бюджетный вариант для редких домашних задач.",
+          "score": "7.8",
+          "specs": {
+            "Крутящий момент": "44 Н·м",
+            "Аккумулятор": "18V 2.0Ah",
+            "Вес": "1.7 кг"
+          },
+          "pros": [
+            "лёгкий корпус",
+            "доступный сервис"
+          ],
+          "cons": [
+            "меньший ресурс",
+            "простая электроника"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=einhell",
+          "price_value": 99,
+          "value_score": 7.8
+        }
+      ]
+    },
+    {
+      "category": "Смартфоны",
+      "category_key": "phone",
+      "generated_at": "2026-01-26T12:16:45.680Z",
+      "items_count": 3,
+      "choices": {
+        "economy": {
+          "product": "Google Pixel 8a",
+          "price": "499€",
+          "price_value": 499,
+          "value_score": 8.3,
+          "level": "Economy",
+          "specs": {
+            "Процессор": "Tensor G3",
+            "Оперативная память": "8GB",
+            "Батарея": "4410 mAh"
+          },
+          "pros": [
+            "хорошая камера",
+            "чистый Android"
+          ],
+          "cons": [
+            "средняя производительность",
+            "небольшой экран"
+          ],
+          "signals": {
+            "positive_mentions": 24,
+            "negative_mentions": 11,
+            "trust_score": 2.9965121972945337,
+            "category_signals": {},
+            "sentiment_ratio": 0.65
+          },
+          "explanation": {
+            "why": "Google Pixel 8a находится на уровне Economy на основе анализа 35 отзывов.",
+            "tradeoffs": [
+              "Цена: 499€",
+              "Отзывы: 24 положительных, 11 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории phone."
+          }
+        },
+        "optimum": {
+          "product": "Samsung Galaxy S24",
+          "price": "899€",
+          "price_value": 899,
+          "value_score": 8.8,
+          "level": "Optimum",
+          "specs": {
+            "Процессор": "Snapdragon 8 Gen 3",
+            "Оперативная память": "12GB",
+            "Батарея": "4000 mAh"
+          },
+          "pros": [
+            "быстрая зарядка",
+            "отличный дисплей"
+          ],
+          "cons": [
+            "нагревается при нагрузке",
+            "не включен адаптер"
+          ],
+          "signals": {
+            "positive_mentions": 34,
+            "negative_mentions": 7,
+            "trust_score": 3.998329511292166,
+            "category_signals": {},
+            "sentiment_ratio": 0.85
+          },
+          "explanation": {
+            "why": "Samsung Galaxy S24 находится на уровне Optimum на основе анализа 41 отзывов.",
+            "tradeoffs": [
+              "Цена: 899€",
+              "Отзывы: 34 положительных, 7 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории phone."
+          }
+        },
+        "premium": {
+          "product": "iPhone 15 Pro Max",
+          "price": "1199€",
+          "price_value": 1199,
+          "value_score": 9.5,
+          "level": "Premium",
+          "specs": {
+            "Процессор": "A17 Pro",
+            "Оперативная память": "8GB",
+            "Батарея": "4685 mAh"
+          },
+          "pros": [
+            "превосходная камера",
+            "мощный процессор"
+          ],
+          "cons": [
+            "высокая цена",
+            "нет слота microSD"
+          ],
+          "signals": {
+            "positive_mentions": 49,
+            "negative_mentions": 3,
+            "trust_score": 4.148819281115314,
+            "category_signals": {},
+            "sentiment_ratio": 0.93
+          },
+          "explanation": {
+            "why": "iPhone 15 Pro Max находится на уровне Premium на основе анализа 52 отзывов.",
+            "tradeoffs": [
+              "Цена: 1199€",
+              "Отзывы: 49 положительных, 3 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории phone."
+          }
+        }
+      },
+      "tradeoffs": {
+        "economyVsOptimum": {
+          "priceDiff": "+400€",
+          "valueGain": "Samsung Galaxy S24 предлагает улучшенные характеристики",
+          "breakEven": "Для регулярного использования"
+        },
+        "optimumVsPremium": {
+          "priceDiff": "+300€",
+          "valueGain": "iPhone 15 Pro Max обеспечивает максимальную надежность",
+          "breakEven": "Для профессионального использования"
+        }
+      },
+      "value_curve": {
+        "statistics": {
+          "minPrice": 499,
+          "maxPrice": 1199,
+          "minValue": 8.3,
+          "maxValue": 9.5,
+          "avgPrice": 865.6666666666666,
+          "avgValue": 8.866666666666667
+        },
+        "inflection_point": {
+          "product": "Samsung Galaxy S24",
+          "price": 899,
+          "value_score": 8.8,
+          "efficiencyDrop": 0.006844612472999391,
+          "explanation": "После Google Pixel 8a (499€) эффективность затрат падает на 0.7%"
+        },
+        "explanations": {
+          "overview": "Проанализировано 3 товаров. Узкий диапазон цен (499-1199€). Товары примерно одинакового качества (8.3-9.5/10).",
+          "inflection": "Перегиб кривой: После Google Pixel 8a (499€) эффективность затрат падает на 0.7%. После этой точки каждый дополнительный евро дает меньше ценности.",
+          "sweetSpot": "Лучшее соотношение цена/ценность: Google Pixel 8a (499€, 1.7% value per €)",
+          "choices": {
+            "economy": "Economy (Google Pixel 8a, 499€): минимальная цена при достаточной ценности (8.3/10)",
+            "optimum": "Optimum (Samsung Galaxy S24, 899€): оптимальный баланс (8.8/10, NaN% value per €)",
+            "premium": "Premium (iPhone 15 Pro Max, 1199€): максимальная ценность (9.5/10) для требовательных пользователей"
+          }
+        },
+        "chart_data": {
+          "datasets": [
+            {
+              "label": "Другие товары",
+              "data": [],
+              "backgroundColor": "rgba(150, 150, 150, 0.3)",
+              "borderColor": "rgba(150, 150, 150, 0.8)",
+              "borderWidth": 1,
+              "pointRadius": 4,
+              "pointHoverRadius": 6
+            },
+            {
+              "label": "💚 Economy: Google Pixel 8a",
+              "data": [
+                {
+                  "x": 499,
+                  "y": 8.3
+                }
+              ],
+              "backgroundColor": "rgba(34, 197, 94, 0.8)",
+              "borderColor": "rgba(34, 197, 94, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💙 Optimum: Samsung Galaxy S24",
+              "data": [
+                {
+                  "x": 899,
+                  "y": 8.8
+                }
+              ],
+              "backgroundColor": "rgba(59, 130, 246, 0.8)",
+              "borderColor": "rgba(59, 130, 246, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💛 Premium: iPhone 15 Pro Max",
+              "data": [
+                {
+                  "x": 1199,
+                  "y": 9.5
+                }
+              ],
+              "backgroundColor": "rgba(234, 179, 8, 0.8)",
+              "borderColor": "rgba(234, 179, 8, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            }
+          ],
+          "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "plugins": {
+              "title": {
+                "display": true,
+                "text": "Кривая \"Цена ↔ Ценность\"",
+                "font": {
+                  "size": 18,
+                  "weight": "bold"
+                }
+              },
+              "legend": {
+                "display": true,
+                "position": "bottom"
+              },
+              "tooltip": {
+                "callbacks": {}
+              }
+            },
+            "scales": {
+              "x": {
+                "type": "linear",
+                "position": "bottom",
+                "title": {
+                  "display": true,
+                  "text": "Цена (€)",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "ticks": {}
+              },
+              "y": {
+                "type": "linear",
+                "title": {
+                  "display": true,
+                  "text": "Value Score",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "max": 10,
+                "ticks": {
+                  "stepSize": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "all_items": [
+        {
+          "level": "Premium",
+          "product": "iPhone 15 Pro Max",
+          "price": "1199€",
+          "summary": "Флагманский смартфон с лучшей камерой и производительностью.",
+          "score": "9.5",
+          "specs": {
+            "Процессор": "A17 Pro",
+            "Оперативная память": "8GB",
+            "Батарея": "4685 mAh"
+          },
+          "pros": [
+            "превосходная камера",
+            "мощный процессор"
+          ],
+          "cons": [
+            "высокая цена",
+            "нет слота microSD"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=iphone15",
+          "price_value": 1199,
+          "value_score": 9.5
+        },
+        {
+          "level": "Optimum",
+          "product": "Samsung Galaxy S24",
+          "price": "899€",
+          "summary": "Отличный баланс цены, мощности и функциональности.",
+          "score": "8.8",
+          "specs": {
+            "Процессор": "Snapdragon 8 Gen 3",
+            "Оперативная память": "12GB",
+            "Батарея": "4000 mAh"
+          },
+          "pros": [
+            "быстрая зарядка",
+            "отличный дисплей"
+          ],
+          "cons": [
+            "нагревается при нагрузке",
+            "не включен адаптер"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=galaxy24",
+          "price_value": 899,
+          "value_score": 8.8
+        },
+        {
+          "level": "Economy",
+          "product": "Google Pixel 8a",
+          "price": "499€",
+          "summary": "Надёжный смартфон с отличной программной обработкой.",
+          "score": "8.3",
+          "specs": {
+            "Процессор": "Tensor G3",
+            "Оперативная память": "8GB",
+            "Батарея": "4410 mAh"
+          },
+          "pros": [
+            "хорошая камера",
+            "чистый Android"
+          ],
+          "cons": [
+            "средняя производительность",
+            "небольшой экран"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=pixel8a",
+          "price_value": 499,
+          "value_score": 8.3
+        }
+      ]
+    },
+    {
+      "category": "Ноутбуки",
+      "category_key": "laptop",
+      "generated_at": "2026-01-26T12:16:45.689Z",
+      "items_count": 3,
+      "choices": {
+        "economy": {
+          "product": "ASUS VivoBook 15",
+          "price": "699€",
+          "price_value": 699,
+          "value_score": 7.9,
+          "level": "Economy",
+          "specs": {
+            "Процессор": "AMD Ryzen 5 7520U",
+            "RAM": "16GB",
+            "Хранилище": "512GB SSD"
+          },
+          "pros": [
+            "доступная цена",
+            "хорошая батарея"
+          ],
+          "cons": [
+            "экран IPS среднего качества",
+            "пластиковый корпус"
+          ],
+          "signals": {
+            "positive_mentions": 20,
+            "negative_mentions": 12,
+            "trust_score": 2.850399626672946,
+            "category_signals": {},
+            "sentiment_ratio": 0.65
+          },
+          "explanation": {
+            "why": "ASUS VivoBook 15 находится на уровне Economy на основе анализа 32 отзывов.",
+            "tradeoffs": [
+              "Цена: 699€",
+              "Отзывы: 20 положительных, 12 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории laptop."
+          }
+        },
+        "optimum": {
+          "product": "Dell XPS 15",
+          "price": "1899€",
+          "price_value": 1899,
+          "value_score": 8.7,
+          "level": "Optimum",
+          "specs": {
+            "Процессор": "Intel Core i7 14700H",
+            "RAM": "16GB DDR5",
+            "Хранилище": "512GB SSD"
+          },
+          "pros": [
+            "красивый дизайн",
+            "хорошая клавиатура"
+          ],
+          "cons": [
+            "может быть горячим",
+            "дорого"
+          ],
+          "signals": {
+            "positive_mentions": 37,
+            "negative_mentions": 6,
+            "trust_score": 3.9917308775893794,
+            "category_signals": {},
+            "sentiment_ratio": 0.85
+          },
+          "explanation": {
+            "why": "Dell XPS 15 находится на уровне Optimum на основе анализа 43 отзывов.",
+            "tradeoffs": [
+              "Цена: 1899€",
+              "Отзывы: 37 положительных, 6 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории laptop."
+          }
+        },
+        "premium": {
+          "product": "MacBook Pro 16\" M4",
+          "price": "3499€",
+          "price_value": 3499,
+          "value_score": 9.6,
+          "level": "Premium",
+          "specs": {
+            "Процессор": "M4 Max",
+            "RAM": "36GB",
+            "Хранилище": "1TB SSD"
+          },
+          "pros": [
+            "невероятная производительность",
+            "отличный дисплей"
+          ],
+          "cons": [
+            "очень дорого",
+            "закрытая экосистема"
+          ],
+          "signals": {
+            "positive_mentions": 48,
+            "negative_mentions": 3,
+            "trust_score": 4.396610639692379,
+            "category_signals": {},
+            "sentiment_ratio": 0.93
+          },
+          "explanation": {
+            "why": "MacBook Pro 16\" M4 находится на уровне Premium на основе анализа 51 отзывов.",
+            "tradeoffs": [
+              "Цена: 3499€",
+              "Отзывы: 48 положительных, 3 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории laptop."
+          }
+        }
+      },
+      "tradeoffs": {
+        "economyVsOptimum": {
+          "priceDiff": "+1200€",
+          "valueGain": "Dell XPS 15 предлагает улучшенные характеристики",
+          "breakEven": "Для регулярного использования"
+        },
+        "optimumVsPremium": {
+          "priceDiff": "+1600€",
+          "valueGain": "MacBook Pro 16\" M4 обеспечивает максимальную надежность",
+          "breakEven": "Для профессионального использования"
+        }
+      },
+      "value_curve": {
+        "statistics": {
+          "minPrice": 699,
+          "maxPrice": 3499,
+          "minValue": 7.9,
+          "maxValue": 9.6,
+          "avgPrice": 2032.3333333333333,
+          "avgValue": 8.733333333333333
+        },
+        "inflection_point": {
+          "product": "Dell XPS 15",
+          "price": 1899,
+          "value_score": 8.7,
+          "efficiencyDrop": 0.006720501189919249,
+          "explanation": "После ASUS VivoBook 15 (699€) эффективность затрат падает на 0.7%"
+        },
+        "explanations": {
+          "overview": "Проанализировано 3 товаров. Узкий диапазон цен (699-3499€). Товары примерно одинакового качества (7.9-9.6/10).",
+          "inflection": "Перегиб кривой: После ASUS VivoBook 15 (699€) эффективность затрат падает на 0.7%. После этой точки каждый дополнительный евро дает меньше ценности.",
+          "sweetSpot": "Лучшее соотношение цена/ценность: ASUS VivoBook 15 (699€, 1.1% value per €)",
+          "choices": {
+            "economy": "Economy (ASUS VivoBook 15, 699€): минимальная цена при достаточной ценности (7.9/10)",
+            "optimum": "Optimum (Dell XPS 15, 1899€): оптимальный баланс (8.7/10, NaN% value per €)",
+            "premium": "Premium (MacBook Pro 16\" M4, 3499€): максимальная ценность (9.6/10) для требовательных пользователей"
+          }
+        },
+        "chart_data": {
+          "datasets": [
+            {
+              "label": "Другие товары",
+              "data": [],
+              "backgroundColor": "rgba(150, 150, 150, 0.3)",
+              "borderColor": "rgba(150, 150, 150, 0.8)",
+              "borderWidth": 1,
+              "pointRadius": 4,
+              "pointHoverRadius": 6
+            },
+            {
+              "label": "💚 Economy: ASUS VivoBook 15",
+              "data": [
+                {
+                  "x": 699,
+                  "y": 7.9
+                }
+              ],
+              "backgroundColor": "rgba(34, 197, 94, 0.8)",
+              "borderColor": "rgba(34, 197, 94, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💙 Optimum: Dell XPS 15",
+              "data": [
+                {
+                  "x": 1899,
+                  "y": 8.7
+                }
+              ],
+              "backgroundColor": "rgba(59, 130, 246, 0.8)",
+              "borderColor": "rgba(59, 130, 246, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💛 Premium: MacBook Pro 16\" M4",
+              "data": [
+                {
+                  "x": 3499,
+                  "y": 9.6
+                }
+              ],
+              "backgroundColor": "rgba(234, 179, 8, 0.8)",
+              "borderColor": "rgba(234, 179, 8, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            }
+          ],
+          "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "plugins": {
+              "title": {
+                "display": true,
+                "text": "Кривая \"Цена ↔ Ценность\"",
+                "font": {
+                  "size": 18,
+                  "weight": "bold"
+                }
+              },
+              "legend": {
+                "display": true,
+                "position": "bottom"
+              },
+              "tooltip": {
+                "callbacks": {}
+              }
+            },
+            "scales": {
+              "x": {
+                "type": "linear",
+                "position": "bottom",
+                "title": {
+                  "display": true,
+                  "text": "Цена (€)",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "ticks": {}
+              },
+              "y": {
+                "type": "linear",
+                "title": {
+                  "display": true,
+                  "text": "Value Score",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "max": 10,
+                "ticks": {
+                  "stepSize": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "all_items": [
+        {
+          "level": "Premium",
+          "product": "MacBook Pro 16\" M4",
+          "price": "3499€",
+          "summary": "Мощный ноутбук для профессионалов и творцов.",
+          "score": "9.6",
+          "specs": {
+            "Процессор": "M4 Max",
+            "RAM": "36GB",
+            "Хранилище": "1TB SSD"
+          },
+          "pros": [
+            "невероятная производительность",
+            "отличный дисплей"
+          ],
+          "cons": [
+            "очень дорого",
+            "закрытая экосистема"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=macbookpro",
+          "price_value": 3499,
+          "value_score": 9.6
+        },
+        {
+          "level": "Optimum",
+          "product": "Dell XPS 15",
+          "price": "1899€",
+          "summary": "Отличный Windows ноутбук для работы и развлечений.",
+          "score": "8.7",
+          "specs": {
+            "Процессор": "Intel Core i7 14700H",
+            "RAM": "16GB DDR5",
+            "Хранилище": "512GB SSD"
+          },
+          "pros": [
+            "красивый дизайн",
+            "хорошая клавиатура"
+          ],
+          "cons": [
+            "может быть горячим",
+            "дорого"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=xps15",
+          "price_value": 1899,
+          "value_score": 8.7
+        },
+        {
+          "level": "Economy",
+          "product": "ASUS VivoBook 15",
+          "price": "699€",
+          "summary": "Бюджетный ноутбук для повседневных задач.",
+          "score": "7.9",
+          "specs": {
+            "Процессор": "AMD Ryzen 5 7520U",
+            "RAM": "16GB",
+            "Хранилище": "512GB SSD"
+          },
+          "pros": [
+            "доступная цена",
+            "хорошая батарея"
+          ],
+          "cons": [
+            "экран IPS среднего качества",
+            "пластиковый корпус"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=vivobook15",
+          "price_value": 699,
+          "value_score": 7.9
+        }
+      ]
+    },
+    {
+      "category": "Наушники",
+      "category_key": "headphones",
+      "generated_at": "2026-01-26T12:16:45.697Z",
+      "items_count": 3,
+      "choices": {
+        "economy": {
+          "product": "Anker Soundcore Space Q45",
+          "price": "99€",
+          "price_value": 99,
+          "value_score": 8.1,
+          "level": "Economy",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Active (ANC)",
+            "Батарея": "50 часов"
+          },
+          "pros": [
+            "дешёвые",
+            "приличное ANC"
+          ],
+          "cons": [
+            "качество звука среднее",
+            "хрупкие"
+          ],
+          "signals": {
+            "positive_mentions": 21,
+            "negative_mentions": 10,
+            "trust_score": 2.5539483816921122,
+            "category_signals": {},
+            "sentiment_ratio": 0.65
+          },
+          "explanation": {
+            "why": "Anker Soundcore Space Q45 находится на уровне Economy на основе анализа 31 отзывов.",
+            "tradeoffs": [
+              "Цена: 99€",
+              "Отзывы: 21 положительных, 10 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории headphones."
+          }
+        },
+        "optimum": {
+          "product": "Sennheiser Momentum 4",
+          "price": "349€",
+          "price_value": 349,
+          "value_score": 8.6,
+          "level": "Optimum",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Passive",
+            "Батарея": "60 часов"
+          },
+          "pros": [
+            "невероятная батарея",
+            "комфортные"
+          ],
+          "cons": [
+            "нет активного шумоподавления",
+            "тяжелые"
+          ],
+          "signals": {
+            "positive_mentions": 36,
+            "negative_mentions": 6,
+            "trust_score": 4.034542882833932,
+            "category_signals": {},
+            "sentiment_ratio": 0.85
+          },
+          "explanation": {
+            "why": "Sennheiser Momentum 4 находится на уровне Optimum на основе анализа 42 отзывов.",
+            "tradeoffs": [
+              "Цена: 349€",
+              "Отзывы: 36 положительных, 6 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории headphones."
+          }
+        },
+        "premium": {
+          "product": "Sony WH-1000XM5",
+          "price": "399€",
+          "price_value": 399,
+          "value_score": 9.4,
+          "level": "Premium",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Active (ANC)",
+            "Батарея": "30 часов"
+          },
+          "pros": [
+            "отличное шумоподавление",
+            "превосходный звук"
+          ],
+          "cons": [
+            "дорогие",
+            "тяжеловаты"
+          ],
+          "signals": {
+            "positive_mentions": 54,
+            "negative_mentions": 3,
+            "trust_score": 3.8303739960067067,
+            "category_signals": {},
+            "sentiment_ratio": 0.93
+          },
+          "explanation": {
+            "why": "Sony WH-1000XM5 находится на уровне Premium на основе анализа 57 отзывов.",
+            "tradeoffs": [
+              "Цена: 399€",
+              "Отзывы: 54 положительных, 3 негативных"
+            ],
+            "bestFor": "Подходит для использования в категории headphones."
+          }
+        }
+      },
+      "tradeoffs": {
+        "economyVsOptimum": {
+          "priceDiff": "+250€",
+          "valueGain": "Sennheiser Momentum 4 предлагает улучшенные характеристики",
+          "breakEven": "Для регулярного использования"
+        },
+        "optimumVsPremium": {
+          "priceDiff": "+50€",
+          "valueGain": "Sony WH-1000XM5 обеспечивает максимальную надежность",
+          "breakEven": "Для профессионального использования"
+        }
+      },
+      "value_curve": {
+        "statistics": {
+          "minPrice": 99,
+          "maxPrice": 399,
+          "minValue": 8.1,
+          "maxValue": 9.4,
+          "avgPrice": 282.3333333333333,
+          "avgValue": 8.700000000000001
+        },
+        "inflection_point": {
+          "product": "Sennheiser Momentum 4",
+          "price": 349,
+          "value_score": 8.6,
+          "efficiencyDrop": 0.05717634800729357,
+          "explanation": "После Anker Soundcore Space Q45 (99€) эффективность затрат падает на 5.7%"
+        },
+        "explanations": {
+          "overview": "Проанализировано 3 товаров. Узкий диапазон цен (99-399€). Товары примерно одинакового качества (8.1-9.4/10).",
+          "inflection": "Перегиб кривой: После Anker Soundcore Space Q45 (99€) эффективность затрат падает на 5.7%. После этой точки каждый дополнительный евро дает меньше ценности.",
+          "sweetSpot": "Лучшее соотношение цена/ценность: Anker Soundcore Space Q45 (99€, 8.2% value per €)",
+          "choices": {
+            "economy": "Economy (Anker Soundcore Space Q45, 99€): минимальная цена при достаточной ценности (8.1/10)",
+            "optimum": "Optimum (Sennheiser Momentum 4, 349€): оптимальный баланс (8.6/10, NaN% value per €)",
+            "premium": "Premium (Sony WH-1000XM5, 399€): максимальная ценность (9.4/10) для требовательных пользователей"
+          }
+        },
+        "chart_data": {
+          "datasets": [
+            {
+              "label": "Другие товары",
+              "data": [],
+              "backgroundColor": "rgba(150, 150, 150, 0.3)",
+              "borderColor": "rgba(150, 150, 150, 0.8)",
+              "borderWidth": 1,
+              "pointRadius": 4,
+              "pointHoverRadius": 6
+            },
+            {
+              "label": "💚 Economy: Anker Soundcore Space Q45",
+              "data": [
+                {
+                  "x": 99,
+                  "y": 8.1
+                }
+              ],
+              "backgroundColor": "rgba(34, 197, 94, 0.8)",
+              "borderColor": "rgba(34, 197, 94, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💙 Optimum: Sennheiser Momentum 4",
+              "data": [
+                {
+                  "x": 349,
+                  "y": 8.6
+                }
+              ],
+              "backgroundColor": "rgba(59, 130, 246, 0.8)",
+              "borderColor": "rgba(59, 130, 246, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            },
+            {
+              "label": "💛 Premium: Sony WH-1000XM5",
+              "data": [
+                {
+                  "x": 399,
+                  "y": 9.4
+                }
+              ],
+              "backgroundColor": "rgba(234, 179, 8, 0.8)",
+              "borderColor": "rgba(234, 179, 8, 1)",
+              "borderWidth": 2,
+              "pointRadius": 8,
+              "pointHoverRadius": 10,
+              "pointStyle": "circle"
+            }
+          ],
+          "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "plugins": {
+              "title": {
+                "display": true,
+                "text": "Кривая \"Цена ↔ Ценность\"",
+                "font": {
+                  "size": 18,
+                  "weight": "bold"
+                }
+              },
+              "legend": {
+                "display": true,
+                "position": "bottom"
+              },
+              "tooltip": {
+                "callbacks": {}
+              }
+            },
+            "scales": {
+              "x": {
+                "type": "linear",
+                "position": "bottom",
+                "title": {
+                  "display": true,
+                  "text": "Цена (€)",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "ticks": {}
+              },
+              "y": {
+                "type": "linear",
+                "title": {
+                  "display": true,
+                  "text": "Value Score",
+                  "font": {
+                    "size": 14,
+                    "weight": "bold"
+                  }
+                },
+                "min": 0,
+                "max": 10,
+                "ticks": {
+                  "stepSize": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "all_items": [
+        {
+          "level": "Premium",
+          "product": "Sony WH-1000XM5",
+          "price": "399€",
+          "summary": "Лучшие шумоподавляющие наушники на рынке.",
+          "score": "9.4",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Active (ANC)",
+            "Батарея": "30 часов"
+          },
+          "pros": [
+            "отличное шумоподавление",
+            "превосходный звук"
+          ],
+          "cons": [
+            "дорогие",
+            "тяжеловаты"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=sonywh1000xm5",
+          "price_value": 399,
+          "value_score": 9.4
+        },
+        {
+          "level": "Optimum",
+          "product": "Sennheiser Momentum 4",
+          "price": "349€",
+          "summary": "Отличное качество звука с хорошей батареей.",
+          "score": "8.6",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Passive",
+            "Батарея": "60 часов"
+          },
+          "pros": [
+            "невероятная батарея",
+            "комфортные"
+          ],
+          "cons": [
+            "нет активного шумоподавления",
+            "тяжелые"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=sennheiser",
+          "price_value": 349,
+          "value_score": 8.6
+        },
+        {
+          "level": "Economy",
+          "product": "Anker Soundcore Space Q45",
+          "price": "99€",
+          "summary": "Хороший бюджетный вариант с ANC.",
+          "score": "8.1",
+          "specs": {
+            "Тип": "Over-ear",
+            "Шумоподавление": "Active (ANC)",
+            "Батарея": "50 часов"
+          },
+          "pros": [
+            "дешёвые",
+            "приличное ANC"
+          ],
+          "cons": [
+            "качество звука среднее",
+            "хрупкие"
+          ],
+          "affiliate_link": "https://www.awin1.com/cread.php?example=ankerspace45",
+          "price_value": 99,
+          "value_score": 8.1
+        }
+      ]
+    }
+  ]
+}

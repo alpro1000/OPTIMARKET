@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "generated_at": "2026-01-26T12:13:36.318Z",
+    "products_count": 3
+  },
+  "statistics": {
+    "minPrice": 99,
+    "maxPrice": 249,
+    "minValue": 7.8,
+    "maxValue": 9.4,
+    "avgPrice": 172.33333333333334,
+    "avgValue": 8.700000000000001
+  },
+  "inflection_point": {
+    "product": "Makita DDF484",
+    "price": 169,
+    "value_score": 8.9,
+    "efficiencyDrop": 0.026125156894387658,
+    "explanation": "После Einhell TE-CD 18/2 (99€) эффективность затрат падает на 2.6%"
+  },
+  "highlights": {
+    "economy": {
+      "product": "Einhell TE-CD 18/2",
+      "price": 99,
+      "value_score": 7.8,
+      "level": "Economy"
+    },
+    "optimum": {
+      "product": "Makita DDF484",
+      "price": 169,
+      "value_score": 8.9,
+      "level": "Optimum"
+    },
+    "premium": {
+      "product": "Bosch GSR 18V-110",
+      "price": 249,
+      "value_score": 9.4,
+      "level": "Premium"
+    }
+  },
+  "explanations": {
+    "overview": "Проанализировано 3 товаров. Узкий диапазон цен (99-249€). Товары примерно одинакового качества (7.8-9.4/10).",
+    "inflection": "Перегиб кривой: После Einhell TE-CD 18/2 (99€) эффективность затрат падает на 2.6%. После этой точки каждый дополнительный евро дает меньше ценности.",
+    "sweetSpot": "Лучшее соотношение цена/ценность: Einhell TE-CD 18/2 (99€, 7.9% value per €)",
+    "choices": {
+      "economy": "Economy (Einhell TE-CD 18/2, 99€): минимальная цена при достаточной ценности (7.8/10)",
+      "optimum": "Optimum (Makita DDF484, 169€): оптимальный баланс (8.9/10, NaN% value per €)",
+      "premium": "Premium (Bosch GSR 18V-110, 249€): максимальная ценность (9.4/10) для требовательных пользователей"
+    }
+  },
+  "chart_data": {
+    "datasets": [
+      {
+        "label": "Другие товары",
+        "data": [],
+        "backgroundColor": "rgba(150, 150, 150, 0.3)",
+        "borderColor": "rgba(150, 150, 150, 0.8)",
+        "borderWidth": 1,
+        "pointRadius": 4,
+        "pointHoverRadius": 6
+      },
+      {
+        "label": "💚 Economy: Einhell TE-CD 18/2",
+        "data": [
+          {
+            "x": 99,
+            "y": 7.8
+          }
+        ],
+        "backgroundColor": "rgba(34, 197, 94, 0.8)",
+        "borderColor": "rgba(34, 197, 94, 1)",
+        "borderWidth": 2,
+        "pointRadius": 8,
+        "pointHoverRadius": 10,
+        "pointStyle": "circle"
+      },
+      {
+        "label": "💙 Optimum: Makita DDF484",
+        "data": [
+          {
+            "x": 169,
+            "y": 8.9
+          }
+        ],
+        "backgroundColor": "rgba(59, 130, 246, 0.8)",
+        "borderColor": "rgba(59, 130, 246, 1)",
+        "borderWidth": 2,
+        "pointRadius": 8,
+        "pointHoverRadius": 10,
+        "pointStyle": "circle"
+      },
+      {
+        "label": "💛 Premium: Bosch GSR 18V-110",
+        "data": [
+          {
+            "x": 249,
+            "y": 9.4
+          }
+        ],
+        "backgroundColor": "rgba(234, 179, 8, 0.8)",
+        "borderColor": "rgba(234, 179, 8, 1)",
+        "borderWidth": 2,
+        "pointRadius": 8,
+        "pointHoverRadius": 10,
+        "pointStyle": "circle"
+      }
+    ],
+    "options": {
+      "responsive": true,
+      "maintainAspectRatio": false,
+      "plugins": {
+        "title": {
+          "display": true,
+          "text": "Кривая \"Цена ↔ Ценность\"",
+          "font": {
+            "size": 18,
+            "weight": "bold"
+          }
+        },
+        "legend": {
+          "display": true,
+          "position": "bottom"
+        },
+        "tooltip": {
+          "callbacks": {}
+        }
+      },
+      "scales": {
+        "x": {
+          "type": "linear",
+          "position": "bottom",
+          "title": {
+            "display": true,
+            "text": "Цена (€)",
+            "font": {
+              "size": 14,
+              "weight": "bold"
+            }
+          },
+          "min": 0,
+          "ticks": {}
+        },
+        "y": {
+          "type": "linear",
+          "title": {
+            "display": true,
+            "text": "Value Score",
+            "font": {
+              "size": 14,
+              "weight": "bold"
+            }
+          },
+          "min": 0,
+          "max": 10,
+          "ticks": {
+            "stepSize": 1
+          }
+        }
+      }
+    }
+  },
+  "raw_data": [
+    {
+      "product": "Einhell TE-CD 18/2",
+      "price": 99,
+      "value_score": 7.8,
+      "level": "Economy",
+      "valuePerDollar": 0.07878787878787878
+    },
+    {
+      "product": "Makita DDF484",
+      "price": 169,
+      "value_score": 8.9,
+      "level": "Optimum",
+      "valuePerDollar": 0.052662721893491124
+    },
+    {
+      "product": "Bosch GSR 18V-110",
+      "price": 249,
+      "value_score": 9.4,
+      "level": "Premium",
+      "valuePerDollar": 0.03775100401606426
+    }
+  ]
+}
