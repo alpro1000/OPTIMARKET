@@ -8,7 +8,10 @@
   },
   "scripts": {
     "start": "node server.js",
-    "run:mvp": "node runMVP.js"
+    "run:mvp": "node runMVP.js",
+    "run:mvp:v2": "node runMVP_v2.js",
+    "test:explanations": "node testExplanations.js",
+    "test:valuecurve": "node testValueCurve.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
