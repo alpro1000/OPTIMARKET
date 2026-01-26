@@ -7,9 +7,12 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "run:mvp": "node runMVP.js"
+    "run:mvp": "node runMVP.js",
+    "test:explanations": "node testExplanations.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.3",
     "node-fetch": "^3.3.2"
   }
 }
