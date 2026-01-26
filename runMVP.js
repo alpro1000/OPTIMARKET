@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import { fetchReviewSnippets } from "./modules/perplexity.js";
 import { extractSignals } from "./modules/reviewSignals.js";
 
@@ -8,6 +9,11 @@ const ECONOMY_MIN_THRESHOLD = 0.45;
 const PREMIUM_PRICE_RATIO = 0.75;
 
 const products = JSON.parse(fs.readFileSync(INPUT_PATH, "utf8"));
+
+const ensureOutputDir = () => {
+  const outputDir = path.dirname(OUTPUT_PATH);
+  fs.mkdirSync(outputDir, { recursive: true });
+};
 
 const computeValueScore = (signals, price, stats) => {
   const sentiment =
@@ -27,6 +33,7 @@ const formatReason = (product, reason) => ({
 
 async function main() {
   console.log("🚀 OptiMarket MVP pipeline started (Perplexity required).");
+  ensureOutputDir();
 
   const enriched = [];
 

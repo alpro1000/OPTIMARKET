@@ -1,4 +1,12 @@
 const grid = document.querySelector("#product-grid");
+const aiStatus = document.querySelector("#ai-status");
+const aiResults = document.querySelector("#ai-results");
+const runMvpButton = document.querySelector("#run-mvp");
+
+const setAiStatus = (message) => {
+  if (!aiStatus) return;
+  aiStatus.textContent = message;
+};
 
 const levelDescriptions = {
   Premium: "Максимальная надёжность и ресурс, для интенсивной работы.",
@@ -45,6 +53,21 @@ const renderCard = (item) => {
   `;
 };
 
+const renderAiCard = ({ level, product, price, reason, signals, valueScore }) => `
+  <article class="ai-card">
+    <div class="product-tier">${level}</div>
+    <h4>${product}</h4>
+    <p class="product-price">${price}</p>
+    <p class="section-text">${reason}</p>
+    <small>Value score: ${valueScore} · Trust: ${signals.trust_score.toFixed(
+      2
+    )}</small>
+    <small>Sentiment: +${signals.positive_mentions} / -${
+  signals.negative_mentions
+}</small>
+  </article>
+`;
+
 const getCategoryName = () =>
   document.querySelector(".selection h2")?.textContent?.trim();
 
@@ -76,3 +99,87 @@ fetch("data/products.json")
     grid.innerHTML =
       "<p class=\"section-text\">Не удалось загрузить подборку.</p>";
   });
+
+const selectionLabels = {
+  economy: "Economy",
+  optimum: "Optimum",
+  premium: "Premium"
+};
+
+const renderAiResults = (payload) => {
+  if (!payload || !payload.selection || !payload.products) {
+    setAiStatus("AI‑отчёт пока недоступен. Запустите AI‑подбор.");
+    if (aiResults) {
+      aiResults.innerHTML = "";
+    }
+    return;
+  }
+
+  const productsById = new Map(
+    payload.products.map((product) => [product.id, product])
+  );
+
+  const cards = Object.entries(payload.selection).map(([key, entry]) => {
+    const product = productsById.get(entry.id);
+    if (!product) return "";
+    return renderAiCard({
+      level: selectionLabels[key] || key,
+      product: product.name,
+      price: `${product.price}€`,
+      reason: entry.reason,
+      signals: product.signals,
+      valueScore: product.value_score
+    });
+  });
+
+  if (aiResults) {
+    aiResults.innerHTML = cards.join("");
+  }
+  setAiStatus(`AI‑подбор обновлён: ${new Date(
+    payload.generated_at
+  ).toLocaleString("ru-RU")}`);
+};
+
+const fetchAiOutput = async () => {
+  try {
+    const response = await fetch("/api/mvp-output");
+    if (!response.ok) throw new Error("No AI output");
+    const payload = await response.json();
+    renderAiResults(payload);
+  } catch (error) {
+    setAiStatus(
+      "AI‑отчёт не найден. Запустите AI‑подбор, чтобы получить данные."
+    );
+  }
+};
+
+const runMvp = async () => {
+  if (!runMvpButton) return;
+  runMvpButton.disabled = true;
+  runMvpButton.textContent = "Запуск...";
+  setAiStatus("AI‑подбор запущен. Ожидаем результаты...");
+
+  try {
+    const response = await fetch("/api/run-mvp", { method: "POST" });
+    const payload = await response.json();
+    if (!response.ok) {
+      throw new Error(payload.error || "Не удалось запустить AI‑подбор.");
+    }
+
+    setAiStatus(
+      "AI‑подбор выполняется. Перезагрузим данные через несколько секунд..."
+    );
+    setTimeout(fetchAiOutput, 4000);
+  } catch (error) {
+    setAiStatus(error.message);
+  } finally {
+    runMvpButton.disabled = false;
+    runMvpButton.textContent = "Запустить AI‑подбор";
+  }
+};
+
+if (runMvpButton) {
+  runMvpButton.addEventListener("click", runMvp);
+}
+
+fetchAiOutput();
