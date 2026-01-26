@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "public": true,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/public/$1" }
-  ],
+  "buildCommand": "npm run run:mvp:v2",
+  "outputDirectory": ".",
   "headers": [
     {
       "source": "/reports/(.*)",
@@ -11,6 +9,10 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=300, s-maxage=600"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }

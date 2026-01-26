@@ -1,215 +1,733 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OPTIMARKET — умный выбор Premium / Optimum / Economy</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container header-content">
-        <div class="brand">
-          <span class="brand-mark">O</span>
-          <div>
-            <h1>OPTIMARKET</h1>
-            <p>ИИ‑куратор выбора: премиум, оптимум, эконом</p>
-          </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTIMARKET — Three options. One honest choice.</title>
+    <meta name="description" content="AI-куратор выбора: не магазин, а помощник. Анализируем отзывы, строим кривую ценности, предлагаем 3 варианта: Economy/Optimum/Premium">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="OPTIMARKET — Честный выбор из 3 вариантов">
+    <meta property="og:description" content="Не 1000 товаров, а 3 понятных решения. Прозрачная логика, реальные отзывы.">
+    <meta property="og:type" content="website">
+
+    <!-- Chart.js для визуализации -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Category selector */
+        .category-section {
+            padding: 60px 20px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .category-card.active {
+            border-color: #667eea;
+            background: #eef2ff;
+        }
+
+        .category-emoji {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .category-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .category-count {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Results */
+        .results-section {
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        /* Value Curve */
+        .value-curve-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 24px;
+        }
+
+        .curve-explanation {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+        }
+
+        /* Choices grid */
+        .choices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .choice-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+        }
+
+        .choice-card.economy {
+            border-color: #22c55e;
+        }
+
+        .choice-card.optimum {
+            border-color: #3b82f6;
+        }
+
+        .choice-card.premium {
+            border-color: #eab308;
+        }
+
+        .choice-level {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .level-badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .level-badge.economy {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .level-badge.optimum {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .level-badge.premium {
+            background: #fef3c7;
+            color: #854d0e;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .explanation-section {
+            margin: 24px 0;
+        }
+
+        .explanation-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #4b5563;
+        }
+
+        .explanation-text {
+            color: #1f2937;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .tradeoffs-list {
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        .tradeoffs-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .tradeoffs-list li:before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .spec-item {
+            font-size: 14px;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .affiliate-button {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .affiliate-button:hover {
+            background: #5568d3;
+        }
+
+        /* Tradeoffs comparison */
+        .tradeoffs-comparison {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .comparison-card {
+            padding: 24px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .comparison-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .comparison-item {
+            margin: 12px 0;
+        }
+
+        .comparison-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+
+        .comparison-value {
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .choices-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <div class="logo">OPTIMARKET</div>
+                <div class="tagline">Three options. One honest choice.</div>
+            </div>
         </div>
-        <button class="ghost-button">Запросить подбор</button>
-      </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <p class="eyebrow">MVP · Инструменты и электроника для дома</p>
-            <h2>Три решения вместо бесконечного каталога</h2>
-            <p class="hero-text">
-              Мы собираем реальные характеристики, цены и отзывы, затем объясняем разницу между
-              моделями и показываем 3 уровня выбора. Всё прозрачно, без склада и логистики.
-            </p>
-            <div class="hero-actions">
-              <button class="primary-button">Посмотреть подбор</button>
-              <button class="secondary-button">Как это работает</button>
-            </div>
-            <div class="hero-metrics">
-              <div>
-                <strong>24h</strong>
-                <span>обновление каталога</span>
-              </div>
-              <div>
-                <strong>3 уровня</strong>
-                <span>Premium / Optimum / Economy</span>
-              </div>
-              <div>
-                <strong>LLM‑объяснение</strong>
-                <span>прозрачные причины выбора</span>
-              </div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <h3>Как подбираем товары</h3>
-            <ul>
-              <li>Собираем характеристики и отзывы из партнёрских источников.</li>
-              <li>Считаем скоринг «цена × качество × надёжность».</li>
-              <li>Выбираем три уровня и объясняем ключевые различия.</li>
-            </ul>
-            <div class="hero-card-footer">
-              <span>Без рекламы — только объяснения.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="selection">
+    <section class="hero">
         <div class="container">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">MVP‑витрина</p>
-              <h2>Аккумуляторные дрели</h2>
-              <p class="section-text">
-                Пример подборки по нише DIY/ремонт: 3 уровня выбора и короткие объяснения.
-              </p>
-            </div>
-            <div class="filters">
-              <label>
-                Ниша
-                <select>
-                  <option>DIY и ремонт</option>
-                  <option disabled>Умный дом</option>
-                  <option disabled>Кухонная техника</option>
-                </select>
-              </label>
-              <label>
-                Цель
-                <select>
-                  <option>Домашний мастер</option>
-                  <option disabled>Профи‑бригада</option>
-                </select>
-              </label>
-            </div>
-          </div>
-          <div id="product-grid" class="product-grid"></div>
-          <div class="ai-panel">
-            <div class="ai-panel-header">
-              <div>
-                <p class="eyebrow">AI‑подбор</p>
-                <h3>Результаты из reports/mvp-output.json</h3>
-                <p class="section-text">
-                  Подключите Perplexity API и запустите AI‑подбор, чтобы обновить выборку.
-                </p>
-              </div>
-              <button id="run-mvp" class="primary-button">Запустить AI‑подбор</button>
-            </div>
-            <p id="ai-status" class="section-text">
-              Ожидаем данные. Нажмите «Запустить AI‑подбор», чтобы получить отчёт.
+            <h1>Не 1000 товаров, а 3 честных варианта</h1>
+            <p class="hero-subtitle">
+                Анализируем отзывы. Строим кривую ценности. Объясняем компромиссы.<br>
+                Вы просто выбираете: Economy, Optimum или Premium.
             </p>
-            <div id="ai-results" class="ai-results"></div>
-          </div>
+            <button class="cta-button" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
+                Посмотреть подбор →
+            </button>
         </div>
-      </section>
+    </section>
 
-      <section class="insights">
-        <div class="container insights-grid">
-          <div>
-            <h2>LLM‑объяснение выбора</h2>
-            <p class="section-text">
-              Каждая рекомендация сопровождается кратким разбором: почему этот товар попал в
-              уровень, какие компромиссы и какие слабые места нашли в отзывах.
-            </p>
-            <div class="insight-cards">
-              <article>
-                <h3>Premium</h3>
-                <p>Максимальная надёжность и ресурс, готов к интенсивной работе.</p>
-              </article>
-              <article>
-                <h3>Optimum</h3>
-                <p>Лучшее соотношение цены и возможностей, баланс для большинства задач.</p>
-              </article>
-              <article>
-                <h3>Economy</h3>
-                <p>Базовые задачи без переплаты, честные ограничения и бюджетные решения.</p>
-              </article>
-            </div>
-          </div>
-          <div class="insight-panel">
-            <h3>PRIE: обзоры и отзывы</h3>
-            <p>
-              Мы агрегируем мнения из тестов и отзывов, выделяем плюсы/минусы и выдаём
-              компактную экспертную сводку.
-            </p>
-            <ul>
-              <li>Источники: Amazon, TechRadar, локальные маркетплейсы.</li>
-              <li>Сигналы: частота поломок, эргономика, стабильность цены.</li>
-              <li>Финальный вывод в 4‑5 строк.</li>
-            </ul>
-            <button class="secondary-button">Посмотреть пример отчёта</button>
-            <div class="insight-report">
-              <p><strong>Как проверить отчёт с ИИ:</strong></p>
-              <ul>
-                <li>Сравнить вывод с сырыми отзывами и тестами из источников.</li>
-                <li>Попросить ИИ перечислить спорные пункты и риски.</li>
-                <li>Проверить расхождения в характеристиках и цене за неделю.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="roadmap">
+    <section class="category-section" id="categories">
         <div class="container">
-          <h2>Запуск MVP за 60 дней</h2>
-          <div class="roadmap-grid">
-            <div>
-              <span>01</span>
-              <h3>Партнёрки</h3>
-              <p>Подключаем Awin, Admitad, Amazon, Heureka.</p>
-            </div>
-            <div>
-              <span>02</span>
-              <h3>Каталог</h3>
-              <p>Собираем 10–15 товаров и нормализуем характеристики.</p>
-            </div>
-            <div>
-              <span>03</span>
-              <h3>Прототип</h3>
-              <p>Витрина Web + Telegram mini‑бот.</p>
-            </div>
-            <div>
-              <span>04</span>
-              <h3>LLM</h3>
-              <p>Интеграция GPT‑5 и Perplexity для объяснений.</p>
-            </div>
-            <div>
-              <span>05</span>
-              <h3>Тест трафика</h3>
-              <p>Проверяем гипотезы через сообщества и YouTube.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+            <h2 class="section-title">Выберите категорию</h2>
+            <p class="section-subtitle">4 категории готовы к показу</p>
 
-    <footer class="site-footer">
-      <div class="container footer-content">
-        <div>
-          <h3>OPTIMARKET</h3>
-          <p>Прозрачный выбор товаров с объяснениями от ИИ.</p>
+            <div class="category-grid">
+                <div class="category-card" onclick="loadCategory('drill', this)">
+                    <div class="category-emoji">🔧</div>
+                    <div class="category-name">Аккумуляторные дрели</div>
+                    <div class="category-count">3 варианта · Economy/Optimum/Premium</div>
+                </div>
+
+                <div class="category-card" onclick="loadCategory('phone', this)">
+                    <div class="category-emoji">📱</div>
+                    <div class="category-name">Смартфоны</div>
+                    <div class="category-count">3 варианта · Economy/Optimum/Premium</div>
+                </div>
+
+                <div class="category-card" onclick="loadCategory('laptop', this)">
+                    <div class="category-emoji">💻</div>
+                    <div class="category-name">Ноутбуки</div>
+                    <div class="category-count">3 варианта · Economy/Optimum/Premium</div>
+                </div>
+
+                <div class="category-card" onclick="loadCategory('headphones', this)">
+                    <div class="category-emoji">🎧</div>
+                    <div class="category-name">Наушники</div>
+                    <div class="category-count">3 варианта · Economy/Optimum/Premium</div>
+                </div>
+            </div>
         </div>
-        <div>
-          <p class="eyebrow">Affiliate</p>
-          <p>Переходы по партнёрским ссылкам поддерживают проект.</p>
+    </section>
+
+    <section class="results-section" id="results">
+        <div class="container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Загружаем данные...</p>
+            </div>
+
+            <div id="content" style="display: none;">
+                <!-- Value Curve -->
+                <div class="value-curve-card">
+                    <h2 class="section-title">Кривая "Цена ↔ Ценность"</h2>
+                    <p class="section-subtitle" id="curve-overview"></p>
+                    <div class="chart-container">
+                        <canvas id="valueCurveChart"></canvas>
+                    </div>
+                    <div class="curve-explanation" id="curve-explanation"></div>
+                </div>
+
+                <!-- Choices -->
+                <h2 class="section-title">Наш выбор</h2>
+                <p class="section-subtitle">3 варианта с объяснениями</p>
+
+                <div class="choices-grid" id="choices"></div>
+
+                <!-- Tradeoffs -->
+                <div class="tradeoffs-comparison">
+                    <h2 class="section-title">Сравнение уровней</h2>
+                    <p class="section-subtitle">Понять компромиссы между вариантами</p>
+                    <div class="comparison-grid" id="tradeoffs"></div>
+                </div>
+            </div>
         </div>
-        <button class="primary-button">Получить подбор</button>
-      </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 OPTIMARKET — AI-куратор выбора</p>
+            <p style="margin-top: 10px; font-size: 14px;">
+                MVP v2.0 · Pipeline: LLM Explanations + Value Curve + Enhanced Signals (240+ keywords)
+            </p>
+        </div>
     </footer>
 
     <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        // Загружаем данные из MVP Pipeline v2
+        let mvpData = null;
+        let currentChart = null;
+
+        // Маппинг категорий
+        const CATEGORY_MAP = {
+            'drill': 'Аккумуляторные дрели',
+            'phone': 'Смартфоны',
+            'laptop': 'Ноутбуки',
+            'headphones': 'Наушники'
+        };
+
+        // Загрузка данных
+        async function init() {
+            try {
+                const response = await fetch('/reports/mvp-v2-output.json');
+                mvpData = await response.json();
+                console.log('✅ MVP Data loaded:', mvpData);
+            } catch (error) {
+                console.error('❌ Failed to load MVP data:', error);
+                alert('Не удалось загрузить данные. Проверьте консоль.');
+            }
+        }
+
+        // Загрузка категории
+        async function loadCategory(categoryKey, element) {
+            // Активируем карточку
+            document.querySelectorAll('.category-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+
+            // Показываем результаты
+            const resultsSection = document.getElementById('results');
+            const loadingEl = document.getElementById('loading');
+            const contentEl = document.getElementById('content');
+
+            resultsSection.classList.add('active');
+            loadingEl.style.display = 'block';
+            contentEl.style.display = 'none';
+
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Имитируем загрузку
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            if (!mvpData) {
+                await init();
+            }
+
+            const categoryName = CATEGORY_MAP[categoryKey];
+            const categoryData = mvpData.results.find(r => r.category === categoryName);
+
+            if (!categoryData) {
+                alert('Данные для категории не найдены');
+                return;
+            }
+
+            // Рендерим данные
+            renderValueCurve(categoryData);
+            renderChoices(categoryData);
+            renderTradeoffs(categoryData);
+
+            loadingEl.style.display = 'none';
+            contentEl.style.display = 'block';
+        }
+
+        // Рендер Value Curve
+        function renderValueCurve(data) {
+            const { value_curve } = data;
+            const { statistics, explanations, chart_data } = value_curve;
+
+            // Overview
+            document.getElementById('curve-overview').textContent = explanations.overview;
+
+            // Explanation
+            const explEl = document.getElementById('curve-explanation');
+            explEl.innerHTML = `
+                <p><strong>📊 Анализ кривой:</strong></p>
+                <p>${explanations.inflection}</p>
+                <p style="margin-top: 12px;"><strong>⭐ Sweet Spot:</strong></p>
+                <p>${explanations.sweetSpot}</p>
+            `;
+
+            // Chart
+            const ctx = document.getElementById('valueCurveChart').getContext('2d');
+
+            // Уничтожаем старый график
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            currentChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: chart_data.datasets
+                },
+                options: chart_data.options
+            });
+        }
+
+        // Рендер выбора
+        function renderChoices(data) {
+            const { choices } = data;
+            const choicesEl = document.getElementById('choices');
+
+            const levels = ['economy', 'optimum', 'premium'];
+            const emojis = { economy: '💚', optimum: '💙', premium: '💛' };
+
+            choicesEl.innerHTML = levels.map(level => {
+                const choice = choices[level];
+                const expl = choice.explanation;
+
+                return `
+                    <div class="choice-card ${level}">
+                        <div class="choice-level">
+                            <span class="level-badge ${level}">${emojis[level]} ${level.toUpperCase()}</span>
+                        </div>
+
+                        <div class="product-name">${choice.product}</div>
+                        <div class="product-price">${choice.price}</div>
+
+                        <div class="explanation-section">
+                            <div class="explanation-title">💬 Почему этот уровень?</div>
+                            <p class="explanation-text">${expl.why}</p>
+                        </div>
+
+                        <div class="explanation-section">
+                            <div class="explanation-title">⚖️ Компромиссы:</div>
+                            <ul class="tradeoffs-list">
+                                ${expl.tradeoffs.map(t => `<li>${t}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="explanation-section">
+                            <div class="explanation-title">👤 Для кого:</div>
+                            <p class="explanation-text">${expl.bestFor}</p>
+                        </div>
+
+                        <div class="specs-grid">
+                            ${Object.entries(choice.specs || {}).map(([key, val]) => `
+                                <div class="spec-item">
+                                    <div class="spec-label">${key}</div>
+                                    <div>${val}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <button class="affiliate-button" onclick="window.open('${choice.affiliate_link || '#'}', '_blank')">
+                            Перейти к покупке →
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Рендер сравнений
+        function renderTradeoffs(data) {
+            const { tradeoffs } = data;
+            const tradeoffsEl = document.getElementById('tradeoffs');
+
+            tradeoffsEl.innerHTML = `
+                <div class="comparison-card">
+                    <div class="comparison-title">💚 → 💙 Economy vs Optimum</div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Разница в цене:</div>
+                        <div class="comparison-value">${tradeoffs.economyVsOptimum.priceDiff}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Что получаем:</div>
+                        <div class="comparison-value">${tradeoffs.economyVsOptimum.valueGain}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Когда окупается:</div>
+                        <div class="comparison-value">${tradeoffs.economyVsOptimum.breakEven}</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-title">💙 → 💛 Optimum vs Premium</div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Разница в цене:</div>
+                        <div class="comparison-value">${tradeoffs.optimumVsPremium.priceDiff}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Что получаем:</div>
+                        <div class="comparison-value">${tradeoffs.optimumVsPremium.valueGain}</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Когда окупается:</div>
+                        <div class="comparison-value">${tradeoffs.optimumVsPremium.breakEven}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Инициализация при загрузке
+        init();
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    <script src="app.js"></script>
-  </body>
+</body>
 </html>
