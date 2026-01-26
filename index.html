@@ -403,13 +403,166 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Feedback Section */
+        .feedback-section {
+            padding: 80px 20px;
+            background: #f9fafb;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1f2937;
+            font-size: 16px;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .rating-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .rating-option:hover {
+            border-color: #8b5cf6;
+            background: #f5f3ff;
+        }
+
+        .rating-option input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .rating-option input[type="radio"]:checked + span {
+            font-weight: 600;
+        }
+
+        .rating-option:has(input[type="radio"]:checked) {
+            border-color: #8b5cf6;
+            background: #f5f3ff;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 14px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .radio-option:hover {
+            border-color: #8b5cf6;
+            background: #f5f3ff;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+        }
+
+        .radio-option:has(input[type="radio"]:checked) {
+            border-color: #8b5cf6;
+            background: #f5f3ff;
+        }
+
+        .form-group textarea,
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group textarea:focus,
+        .form-group input[type="email"]:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .form-result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-result.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .form-result.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
         /* Footer */
         footer {
             background: #1f2937;
             color: white;
             padding: 40px 20px;
             text-align: center;
-            margin-top: 80px;
+            margin-top: 0;
         }
 
         footer p {
@@ -428,6 +581,18 @@
 
             .specs-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .feedback-card {
+                padding: 24px;
+            }
+
+            .rating-group {
+                flex-direction: column;
+            }
+
+            .rating-option {
+                width: 100%;
             }
         }
     </style>
@@ -518,6 +683,138 @@
                     <p class="section-subtitle">Понять компромиссы между вариантами</p>
                     <div class="comparison-grid" id="tradeoffs"></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <div class="container">
+            <h2 class="section-title">Помогите нам стать лучше</h2>
+            <p class="section-subtitle">
+                Это MVP. Ваш feedback критически важен для улучшения сервиса.<br>
+                Ответьте на 5 коротких вопросов (займет 2 минуты).
+            </p>
+
+            <div class="feedback-card">
+                <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms access key (замените на свой) -->
+                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" value="OPTIMARKET Feedback">
+                    <input type="hidden" name="from_name" value="OPTIMARKET User">
+
+                    <!-- Вопрос 1: Понятность объяснений -->
+                    <div class="form-group">
+                        <label for="clarity">1. Понятны ли объяснения выбора?</label>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="clarity" value="1" required>
+                                <span>1 - Непонятно</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="clarity" value="2">
+                                <span>2</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="clarity" value="3">
+                                <span>3</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="clarity" value="4">
+                                <span>4</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="clarity" value="5">
+                                <span>5 - Очень понятно</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 2: Доверие -->
+                    <div class="form-group">
+                        <label for="trust">2. Доверяете ли вы этому выбору?</label>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="trust" value="1" required>
+                                <span>1 - Не доверяю</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="trust" value="2">
+                                <span>2</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="trust" value="3">
+                                <span>3</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="trust" value="4">
+                                <span>4</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="trust" value="5">
+                                <span>5 - Полностью доверяю</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 3: Что смущает -->
+                    <div class="form-group">
+                        <label for="concerns">3. Что смущает или непонятно?</label>
+                        <textarea
+                            id="concerns"
+                            name="concerns"
+                            rows="4"
+                            placeholder="Опишите что вызывает вопросы или сомнения..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Вопрос 4: Использование -->
+                    <div class="form-group">
+                        <label for="would_use">4. Воспользовались бы таким сервисом?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="would_use" value="yes" required>
+                                <span>✅ Да, обязательно</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="would_use" value="maybe">
+                                <span>🤔 Возможно</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="would_use" value="no">
+                                <span>❌ Нет</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 5: Категории -->
+                    <div class="form-group">
+                        <label for="categories">5. Какие категории хотели бы видеть?</label>
+                        <textarea
+                            id="categories"
+                            name="categories"
+                            rows="3"
+                            placeholder="Например: кофемашины, пылесосы, фотоаппараты..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Email (optional) -->
+                    <div class="form-group">
+                        <label for="email">Email (если хотите получить результаты)</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="your@email.com"
+                        >
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        Отправить feedback
+                    </button>
+
+                    <div id="formResult" class="form-result"></div>
+                </form>
             </div>
         </div>
     </section>
@@ -724,6 +1021,48 @@
                     </div>
                 </div>
             `;
+        }
+
+        // Обработка feedback формы
+        const feedbackForm = document.getElementById('feedbackForm');
+        const formResult = document.getElementById('formResult');
+
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const submitButton = feedbackForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Отправка...';
+                formResult.style.display = 'none';
+
+                try {
+                    const formData = new FormData(feedbackForm);
+                    const response = await fetch(feedbackForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        formResult.className = 'form-result success';
+                        formResult.textContent = '✅ Спасибо за feedback! Ваше мнение очень важно для нас.';
+                        feedbackForm.reset();
+                    } else {
+                        throw new Error(data.message || 'Submission failed');
+                    }
+                } catch (error) {
+                    formResult.className = 'form-result error';
+                    formResult.textContent = '❌ Ошибка отправки. Попробуйте позже или напишите напрямую.';
+                    console.error('Form submission error:', error);
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
         }
 
         // Инициализация при загрузке

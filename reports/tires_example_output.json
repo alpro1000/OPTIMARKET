@@ -1,0 +1,324 @@
+{
+  "category": "Летние шины 225/45 R17",
+  "total_products": 33,
+  "selected": {
+    "economy": [
+      {
+        "name": "Nexen Model P",
+        "brand": "Nexen",
+        "price": 3541,
+        "value_score": 0.7026953601953603,
+        "rating": 4.1,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Kumho Model P",
+        "brand": "Kumho",
+        "price": 4922,
+        "value_score": 0.6848046398046399,
+        "rating": 4,
+        "specs": {
+          "fuel_efficiency": "A",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Nexen Model U",
+        "brand": "Nexen",
+        "price": 4803,
+        "value_score": 0.6727106227106228,
+        "rating": 4.2,
+        "specs": {
+          "fuel_efficiency": "A",
+          "wet_grip": "A",
+          "noise": 72,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ],
+    "optimum": [
+      {
+        "name": "Goodyear Model V",
+        "brand": "Goodyear",
+        "price": 7141,
+        "value_score": 0.6739499389499389,
+        "rating": 4.5,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 71,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Goodyear Model B",
+        "brand": "Goodyear",
+        "price": 7696,
+        "value_score": 0.6712301587301588,
+        "rating": 4.3,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Dunlop Model L",
+        "brand": "Dunlop",
+        "price": 6801,
+        "value_score": 0.6680860805860805,
+        "rating": 4.3,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "A",
+          "noise": 72,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ],
+    "premium": [
+      {
+        "name": "Bridgestone Model E",
+        "brand": "Bridgestone",
+        "price": 11361,
+        "value_score": 0.6550641025641026,
+        "rating": 4.9,
+        "specs": {
+          "fuel_efficiency": "C",
+          "wet_grip": "B",
+          "noise": 68,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Bridgestone Model K",
+        "brand": "Bridgestone",
+        "price": 10245,
+        "value_score": 0.6531501831501831,
+        "rating": 4.9,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 72,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Pirelli Model U",
+        "brand": "Pirelli",
+        "price": 12285,
+        "value_score": 0.6341666666666668,
+        "rating": 4.6,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ]
+  },
+  "explanations": {
+    "economy": {
+      "why": "Бюджетные шины с хорошим соотношением цена/качество. Средняя цена 4422₽. Подходят для города и умеренной езды.",
+      "tradeoffs": [
+        "Цена: 4422₽ (экономия 40-60% от Premium)",
+        "EU Label: преимущественно B-C (приемлемые характеристики)",
+        "Износостойкость: 40 000 - 60 000 км",
+        "Комфорт: базовый уровень шумоизоляции"
+      ],
+      "bestFor": "Водители с пробегом до 15 000 км/год, городская эксплуатация, ограниченный бюджет"
+    },
+    "optimum": {
+      "why": "Оптимальный баланс между ценой и качеством. Средняя цена 7213₽. Лучший выбор для большинства водителей.",
+      "tradeoffs": [
+        "Цена: 7213₽ (на 60-80% дороже Economy)",
+        "EU Label: A-B (отличные характеристики)",
+        "Износостойкость: 60 000 - 80 000 км",
+        "Комфорт: низкий уровень шума, хорошая управляемость"
+      ],
+      "bestFor": "Ежедневная эксплуатация, город + трасса, пробег 15 000 - 25 000 км/год"
+    },
+    "premium": {
+      "why": "Премиум-шины от ведущих брендов. Средняя цена 11297₽. Максимальные характеристики, но с убывающей отдачей.",
+      "tradeoffs": [
+        "Цена: 11297₽ (на 40-100% дороже Optimum)",
+        "EU Label: A (топовые характеристики)",
+        "Износостойкость: 80 000+ км",
+        "Комфорт: минимальный шум, превосходная управляемость"
+      ],
+      "bestFor": "Энтузиасты вождения, премиум-автомобили, активная езда, пробег 25 000+ км/год"
+    }
+  },
+  "value_curve": {
+    "data_points": [
+      {
+        "x": 3541,
+        "y": 0.7026953601953603,
+        "label": "Nexen Model P"
+      },
+      {
+        "x": 4922,
+        "y": 0.6848046398046399,
+        "label": "Kumho Model P"
+      },
+      {
+        "x": 7141,
+        "y": 0.6739499389499389,
+        "label": "Goodyear Model V"
+      },
+      {
+        "x": 4803,
+        "y": 0.6727106227106228,
+        "label": "Nexen Model U"
+      },
+      {
+        "x": 7696,
+        "y": 0.6712301587301588,
+        "label": "Goodyear Model B"
+      },
+      {
+        "x": 4236,
+        "y": 0.6707234432234432,
+        "label": "Matador Model T"
+      },
+      {
+        "x": 6801,
+        "y": 0.6680860805860805,
+        "label": "Dunlop Model L"
+      },
+      {
+        "x": 3548,
+        "y": 0.6608577533577533,
+        "label": "Kumho Model O"
+      },
+      {
+        "x": 11361,
+        "y": 0.6550641025641026,
+        "label": "Bridgestone Model E"
+      },
+      {
+        "x": 4819,
+        "y": 0.6548199023199024,
+        "label": "Matador Model M"
+      },
+      {
+        "x": 4452,
+        "y": 0.6546153846153846,
+        "label": "Kumho Model W"
+      },
+      {
+        "x": 10245,
+        "y": 0.6531501831501831,
+        "label": "Bridgestone Model K"
+      },
+      {
+        "x": 5600,
+        "y": 0.6424145299145301,
+        "label": "Hankook Model G"
+      },
+      {
+        "x": 5853,
+        "y": 0.6404029304029304,
+        "label": "Matador Model J"
+      },
+      {
+        "x": 8325,
+        "y": 0.6400366300366301,
+        "label": "Goodyear Model F"
+      },
+      {
+        "x": 6475,
+        "y": 0.6343803418803419,
+        "label": "Nokian Model W"
+      },
+      {
+        "x": 12285,
+        "y": 0.6341666666666668,
+        "label": "Pirelli Model U"
+      },
+      {
+        "x": 4526,
+        "y": 0.6319749694749695,
+        "label": "Hankook Model K"
+      },
+      {
+        "x": 3921,
+        "y": 0.6259157509157509,
+        "label": "Nexen Model E"
+      },
+      {
+        "x": 4427,
+        "y": 0.6252258852258852,
+        "label": "Matador Model D"
+      },
+      {
+        "x": 12129,
+        "y": 0.6221428571428571,
+        "label": "Pirelli Model M"
+      },
+      {
+        "x": 8181,
+        "y": 0.6185531135531136,
+        "label": "Yokohama Model J"
+      },
+      {
+        "x": 11851,
+        "y": 0.6139316239316239,
+        "label": "Continental Model X"
+      },
+      {
+        "x": 9731,
+        "y": 0.6107020757020757,
+        "label": "Dunlop Model T"
+      },
+      {
+        "x": 5425,
+        "y": 0.5850213675213676,
+        "label": "Kumho Model N"
+      },
+      {
+        "x": 11451,
+        "y": 0.5828663003663004,
+        "label": "Bridgestone Model W"
+      },
+      {
+        "x": 9214,
+        "y": 0.5816605616605617,
+        "label": "Yokohama Model Q"
+      },
+      {
+        "x": 9132,
+        "y": 0.5594963369963369,
+        "label": "Nokian Model O"
+      },
+      {
+        "x": 9330,
+        "y": 0.5588278388278388,
+        "label": "Dunlop Model A"
+      }
+    ],
+    "inflection_point": {
+      "name": "Kumho Model W",
+      "price": 4452,
+      "value_score": 0.6546153846153846
+    }
+  }
+}
