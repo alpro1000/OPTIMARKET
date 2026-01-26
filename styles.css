@@ -230,6 +230,47 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+.ai-panel {
+  margin-top: 32px;
+  background: var(--card);
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.ai-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ai-results {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.ai-card {
+  background: var(--bg);
+  border-radius: 18px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+}
+
+.ai-card h4 {
+  font-size: 16px;
+}
+
+.ai-card small {
+  color: var(--muted);
+}
+
 .product-card {
   background: var(--card);
   border-radius: 24px;
