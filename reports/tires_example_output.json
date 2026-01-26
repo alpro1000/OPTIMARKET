@@ -1,0 +1,309 @@
+{
+  "category": "Летние шины 225/45 R17",
+  "total_products": 27,
+  "selected": {
+    "economy": [
+      {
+        "name": "Nokian Model Q",
+        "brand": "Nokian",
+        "price": 6656,
+        "value_score": 0.7341758487861687,
+        "rating": 4.4,
+        "specs": {
+          "fuel_efficiency": "A",
+          "wet_grip": "C",
+          "noise": 68,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Matador Model U",
+        "brand": "Matador",
+        "price": 5203,
+        "value_score": 0.6734623309146288,
+        "rating": 4.3,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 71,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Kumho Model N",
+        "brand": "Kumho",
+        "price": 5951,
+        "value_score": 0.6683857386007346,
+        "rating": 4,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 68,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ],
+    "optimum": [
+      {
+        "name": "Dunlop Model C",
+        "brand": "Dunlop",
+        "price": 7737,
+        "value_score": 0.6873873510705008,
+        "rating": 4.4,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 71,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Goodyear Model K",
+        "brand": "Goodyear",
+        "price": 6995,
+        "value_score": 0.6815096748185971,
+        "rating": 4.4,
+        "specs": {
+          "fuel_efficiency": "C",
+          "wet_grip": "B",
+          "noise": 69,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Yokohama Model W",
+        "brand": "Yokohama",
+        "price": 8232,
+        "value_score": 0.6674101943921885,
+        "rating": 4.2,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "B",
+          "noise": 69,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ],
+    "premium": [
+      {
+        "name": "Continental Model D",
+        "brand": "Continental",
+        "price": 10595,
+        "value_score": 0.7089485353399625,
+        "rating": 4.7,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "C",
+          "noise": 68,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Michelin Model A",
+        "brand": "Michelin",
+        "price": 14662,
+        "value_score": 0.6644746036011825,
+        "rating": 4.7,
+        "specs": {
+          "fuel_efficiency": "A",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      },
+      {
+        "name": "Pirelli Model P",
+        "brand": "Pirelli",
+        "price": 14284,
+        "value_score": 0.6462601899131057,
+        "rating": 4.6,
+        "specs": {
+          "fuel_efficiency": "B",
+          "wet_grip": "A",
+          "noise": 70,
+          "speed_index": "Y",
+          "load_index": "94"
+        }
+      }
+    ]
+  },
+  "explanations": {
+    "economy": {
+      "why": "Бюджетные шины с хорошим соотношением цена/качество. Средняя цена 5937₽. Подходят для города и умеренной езды.",
+      "tradeoffs": [
+        "Цена: 5937₽ (экономия 40-60% от Premium)",
+        "EU Label: преимущественно B-C (приемлемые характеристики)",
+        "Износостойкость: 40 000 - 60 000 км",
+        "Комфорт: базовый уровень шумоизоляции"
+      ],
+      "bestFor": "Водители с пробегом до 15 000 км/год, городская эксплуатация, ограниченный бюджет"
+    },
+    "optimum": {
+      "why": "Оптимальный баланс между ценой и качеством. Средняя цена 7655₽. Лучший выбор для большинства водителей.",
+      "tradeoffs": [
+        "Цена: 7655₽ (на 60-80% дороже Economy)",
+        "EU Label: A-B (отличные характеристики)",
+        "Износостойкость: 60 000 - 80 000 км",
+        "Комфорт: низкий уровень шума, хорошая управляемость"
+      ],
+      "bestFor": "Ежедневная эксплуатация, город + трасса, пробег 15 000 - 25 000 км/год"
+    },
+    "premium": {
+      "why": "Премиум-шины от ведущих брендов. Средняя цена 13180₽. Максимальные характеристики, но с убывающей отдачей.",
+      "tradeoffs": [
+        "Цена: 13180₽ (на 40-100% дороже Optimum)",
+        "EU Label: A (топовые характеристики)",
+        "Износостойкость: 80 000+ км",
+        "Комфорт: минимальный шум, превосходная управляемость"
+      ],
+      "bestFor": "Энтузиасты вождения, премиум-автомобили, активная езда, пробег 25 000+ км/год"
+    }
+  },
+  "value_curve": {
+    "data_points": [
+      {
+        "x": 6656,
+        "y": 0.7341758487861687,
+        "label": "Nokian Model Q"
+      },
+      {
+        "x": 10595,
+        "y": 0.7089485353399625,
+        "label": "Continental Model D"
+      },
+      {
+        "x": 7737,
+        "y": 0.6873873510705008,
+        "label": "Dunlop Model C"
+      },
+      {
+        "x": 6995,
+        "y": 0.6815096748185971,
+        "label": "Goodyear Model K"
+      },
+      {
+        "x": 5203,
+        "y": 0.6734623309146288,
+        "label": "Matador Model U"
+      },
+      {
+        "x": 5951,
+        "y": 0.6683857386007346,
+        "label": "Kumho Model N"
+      },
+      {
+        "x": 8232,
+        "y": 0.6674101943921885,
+        "label": "Yokohama Model W"
+      },
+      {
+        "x": 14662,
+        "y": 0.6644746036011825,
+        "label": "Michelin Model A"
+      },
+      {
+        "x": 4927,
+        "y": 0.6640253516079908,
+        "label": "Hankook Model S"
+      },
+      {
+        "x": 10309,
+        "y": 0.663879781420765,
+        "label": "Michelin Model Q"
+      },
+      {
+        "x": 9696,
+        "y": 0.657901997670877,
+        "label": "Yokohama Model Y"
+      },
+      {
+        "x": 4871,
+        "y": 0.655154080444325,
+        "label": "Kumho Model U"
+      },
+      {
+        "x": 6706,
+        "y": 0.6523347218489653,
+        "label": "Nokian Model V"
+      },
+      {
+        "x": 3828,
+        "y": 0.6495099883543851,
+        "label": "Nexen Model D"
+      },
+      {
+        "x": 4708,
+        "y": 0.6484394875929409,
+        "label": "Hankook Model X"
+      },
+      {
+        "x": 14284,
+        "y": 0.6462601899131057,
+        "label": "Pirelli Model P"
+      },
+      {
+        "x": 7347,
+        "y": 0.6385814745140195,
+        "label": "Yokohama Model P"
+      },
+      {
+        "x": 13253,
+        "y": 0.6362075606915705,
+        "label": "Michelin Model Y"
+      },
+      {
+        "x": 5042,
+        "y": 0.6317074263190898,
+        "label": "Kumho Model B"
+      },
+      {
+        "x": 9071,
+        "y": 0.6296660843859178,
+        "label": "Nokian Model U"
+      },
+      {
+        "x": 11907,
+        "y": 0.6225040311744154,
+        "label": "Pirelli Model A"
+      },
+      {
+        "x": 14884,
+        "y": 0.6183333333333334,
+        "label": "Pirelli Model F"
+      },
+      {
+        "x": 11929,
+        "y": 0.6112272686553794,
+        "label": "Bridgestone Model J"
+      },
+      {
+        "x": 9005,
+        "y": 0.610996371943026,
+        "label": "Yokohama Model A"
+      },
+      {
+        "x": 14298,
+        "y": 0.605144674370689,
+        "label": "Pirelli Model E"
+      },
+      {
+        "x": 14822,
+        "y": 0.5979163307354654,
+        "label": "Michelin Model I"
+      }
+    ],
+    "inflection_point": {
+      "name": "Nokian Model U",
+      "price": 9071,
+      "value_score": 0.6296660843859178
+    }
+  }
+}
