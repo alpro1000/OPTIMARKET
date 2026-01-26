@@ -141,28 +141,15 @@ const renderAiResults = (payload) => {
 };
 
 const fetchAiOutput = async () => {
-  const response = await fetch("/api/mvp-output");
-  if (!response.ok) throw new Error("No AI output");
-  const payload = await response.json();
-  renderAiResults(payload);
-};
-
-const pollAiOutput = async ({
-  attempts = 8,
-  intervalMs = 3000,
-  onTimeout
-} = {}) => {
-  for (let attempt = 0; attempt < attempts; attempt += 1) {
-    try {
-      await fetchAiOutput();
-      return;
-    } catch (error) {
-      await new Promise((resolve) => setTimeout(resolve, intervalMs));
-    }
-  }
-
-  if (onTimeout) {
-    onTimeout();
+  try {
+    const response = await fetch("/api/mvp-output");
+    if (!response.ok) throw new Error("No AI output");
+    const payload = await response.json();
+    renderAiResults(payload);
+  } catch (error) {
+    setAiStatus(
+      "AI‑отчёт не найден. Запустите AI‑подбор, чтобы получить данные."
+    );
   }
 };
 
@@ -180,15 +167,9 @@ const runMvp = async () => {
     }
 
     setAiStatus(
-      "AI‑подбор выполняется. Обновим отчёт, как только он будет готов."
+      "AI‑подбор выполняется. Перезагрузим данные через несколько секунд..."
     );
-    await pollAiOutput({
-      onTimeout: () => {
-        setAiStatus(
-          "AI‑подбор всё ещё выполняется. Обновите страницу позже."
-        );
-      }
-    });
+    setTimeout(fetchAiOutput, 4000);
   } catch (error) {
     setAiStatus(error.message);
   } finally {
@@ -201,12 +182,4 @@ if (runMvpButton) {
   runMvpButton.addEventListener("click", runMvp);
 }
 
-pollAiOutput({
-  attempts: 2,
-  intervalMs: 1000,
-  onTimeout: () => {
-    setAiStatus(
-      "AI‑отчёт не найден. Запустите AI‑подбор, чтобы получить данные."
-    );
-  }
-});
+fetchAiOutput();
