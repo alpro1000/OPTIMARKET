@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "buildCommand": "npm run run:mvp:v2",
+  "outputDirectory": ".",
+  "headers": [
+    {
+      "source": "/reports/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=600"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}
