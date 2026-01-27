@@ -544,19 +544,18 @@
             'headphones': 'Наушники'
         };
 
-        // Загрузка данных
+        // Загрузка данных (legacy fallback)
         async function init() {
             try {
                 const response = await fetch('/reports/mvp-v2-output.json');
                 mvpData = await response.json();
-                console.log('✅ MVP Data loaded:', mvpData);
+                console.log('✅ MVP Data loaded (static):', mvpData);
             } catch (error) {
-                console.error('❌ Failed to load MVP data:', error);
-                alert('Не удалось загрузить данные. Проверьте консоль.');
+                console.error('⚠️  Static data not available, will use API:', error);
             }
         }
 
-        // Загрузка категории
+        // Загрузка категории через API
         async function loadCategory(categoryKey, element) {
             // Активируем карточку
             document.querySelectorAll('.category-card').forEach(card => card.classList.remove('active'));
@@ -573,18 +572,70 @@
 
             resultsSection.scrollIntoView({ behavior: 'smooth' });
 
-            // Имитируем загрузку
-            await new Promise(resolve => setTimeout(resolve, 500));
+            try {
+                console.log(`📡 Loading category: ${categoryKey} via API...`);
 
-            if (!mvpData) {
-                await init();
-            }
+                // НОВОЕ: Загружаем данные через Serverless Function
+                const apiUrl = `/api/generate?category=${categoryKey}s`; // drills, phones, laptops, headphones
+                const response = await fetch(apiUrl);
 
-            const categoryName = CATEGORY_MAP[categoryKey];
-            const categoryData = mvpData.results.find(r => r.category === categoryName);
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status} ${response.statusText}`);
+                }
 
-            if (!categoryData) {
-                alert('Данные для категории не найдены');
+                const apiData = await response.json();
+                console.log('✅ API Data received:', apiData);
+
+                // Преобразуем формат API в формат ожидаемый frontend
+                const categoryData = {
+                    category: CATEGORY_MAP[categoryKey],
+                    choices: apiData.choices,
+                    value_curve: apiData.value_curve,
+                    tradeoffs: apiData.tradeoffs,
+                    metadata: apiData.metadata
+                };
+
+                // Рендерим данные
+                renderValueCurve(categoryData);
+                renderChoices(categoryData);
+                renderTradeoffs(categoryData);
+
+                // Показываем метаданные
+                if (categoryData.metadata) {
+                    console.log(`📊 Data source: ${categoryData.metadata.data_source}`);
+                    console.log(`🔑 API keys used:`, categoryData.metadata.api_keys_used);
+                }
+
+                loadingEl.style.display = 'none';
+                contentEl.style.display = 'block';
+
+            } catch (error) {
+                console.error('❌ Failed to load category data:', error);
+
+                // Fallback: пробуем статичные данные
+                console.log('⚠️  Trying fallback to static data...');
+                loadingEl.style.display = 'none';
+
+                if (!mvpData) {
+                    await init();
+                }
+
+                if (mvpData) {
+                    const categoryName = CATEGORY_MAP[categoryKey];
+                    const categoryData = mvpData.results?.find(r => r.category === categoryName);
+
+                    if (categoryData) {
+                        renderValueCurve(categoryData);
+                        renderChoices(categoryData);
+                        renderTradeoffs(categoryData);
+                        contentEl.style.display = 'block';
+                        return;
+                    }
+                }
+
+                // Если ничего не сработало
+                alert('Не удалось загрузить данные. API недоступен и статичные данные не найдены.');
+                resultsSection.classList.remove('active');
                 return;
             }
 

@@ -5,27 +5,16 @@ import { fetchReviewSnippets } from '../modules/perplexity.js';
 import { extractSignals } from '../modules/reviewSignals.js';
 import { calculateValueCurve, explainValueCurve } from '../modules/valueCurve.js';
 import { generateAllExplanations } from '../modules/explanations.js';
+import { fetchAwinProducts } from '../modules/shopParser.js';
 
-// Пример: парсинг каталога магазина
-async function fetchProductsFromShop(category) {
-  // TODO: Реальный парсинг сайта из Awin
-  // Пока используем mock данные
-
-  const mockProducts = {
-    'tires': [
-      {
-        product: 'Michelin Pilot Sport 4',
-        price: '€145',
-        specs: { size: '225/45 R17', speed: 'Y', load: '94' },
-        url: 'https://shop.com/michelin-pilot-sport-4',
-        affiliate_link: 'https://awin1.com/...' // После подключения
-      },
-      // ... больше товаров
-    ]
-  };
-
-  return mockProducts[category] || [];
-}
+// Маппинг категорий на Awin advertiser IDs (нужно заполнить после регистрации)
+const AWIN_ADVERTISERS = {
+  'drills': parseInt(process.env.AWIN_ADVERTISER_TOOLS) || null,
+  'headphones': parseInt(process.env.AWIN_ADVERTISER_ELECTRONICS) || null,
+  'laptops': parseInt(process.env.AWIN_ADVERTISER_COMPUTERS) || null,
+  'phones': parseInt(process.env.AWIN_ADVERTISER_MOBILE) || null,
+  'tires': parseInt(process.env.AWIN_ADVERTISER_AUTO) || null
+};
 
 // Основная функция
 export default async function handler(req, res) {
@@ -34,9 +23,14 @@ export default async function handler(req, res) {
   try {
     console.log(`🔧 Generating recommendations for: ${category}`);
 
-    // 1. Получаем товары из магазина
-    const products = await fetchProductsFromShop(category);
-    console.log(`📦 Found ${products.length} products`);
+    // 1. Получаем товары через Awin Product Feed API
+    const advertiserId = AWIN_ADVERTISERS[category];
+    const products = await fetchAwinProducts({
+      category,
+      advertiserId,
+      limit: 50 // Для MVP достаточно 50 товаров
+    });
+    console.log(`📦 Found ${products.length} products from Awin`);
 
     // 2. Для каждого товара ищем отзывы (Perplexity)
     const enrichedProducts = [];
@@ -82,9 +76,21 @@ export default async function handler(req, res) {
         ...valueCurve,
         explanations: valueCurveExplanations
       },
-      tradeoffs: calculateTradeoffs(choices)
+      tradeoffs: calculateTradeoffs(choices),
+      metadata: {
+        total_products_analyzed: products.length,
+        data_source: products[0]?.source || 'unknown',
+        awin_advertiser_id: advertiserId || 'demo',
+        api_keys_used: {
+          perplexity: !!process.env.PERPLEXITY_API_KEY,
+          gemini: !!process.env.GEMINI_API_KEY,
+          awin: !!process.env.AWIN_API_KEY
+        }
+      }
     };
 
+    // Cache для снижения API costs (в production добавить Redis)
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
     res.status(200).json(result);
 
   } catch (error) {
