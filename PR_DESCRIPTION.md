@@ -326,3 +326,5 @@ This MVP is **production-ready** with:
 ---
 
 **Questions?** Check the documentation or Vercel logs after deploy.
+
+🔗 **See [PR_REFERENCES.md](./PR_REFERENCES.md) for complete PR tracking and integrations**

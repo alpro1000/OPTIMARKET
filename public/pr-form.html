@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTIMARKET - PR Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-item label,
+        .radio-item label {
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-generate {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-generate:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-copy {
+            background: #764ba2;
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background: #653a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        .btn-clear {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-clear:hover {
+            background: #d0d0d0;
+        }
+
+        .btn-download {
+            background: #4caf50;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .preview-content {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-section {
+                max-height: none;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+        .component-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-section">
+            <h1>📝 PR Generator</h1>
+            <div class="success-message" id="successMsg">✅ Copied to clipboard!</div>
+
+            <form id="prForm">
+                <!-- Basic Info -->
+                <div class="section-title">📌 PR Information</div>
+                
+                <div class="form-group">
+                    <label for="prTitle">PR Title *</label>
+                    <input type="text" id="prTitle" placeholder="e.g., Add Perplexity API Integration" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prDate">Date</label>
+                    <input type="date" id="prDate">
+                </div>
+
+                <!-- Components -->
+                <div class="section-title">🧩 Components Modified</div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compDb" name="components" value="Database (database.js)">
+                            <label for="compDb">Database (database.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compFetcher" name="components" value="Web Scraper (productFetcher.js)">
+                            <label for="compFetcher">Web Scraper (productFetcher.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compTrust" name="components" value="Trust Score (trustScore.js)">
+                            <label for="compTrust">Trust Score (trustScore.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compPrice" name="components" value="Price Tracker (priceTracker.js)">
+                            <label for="compPrice">Price Tracker (priceTracker.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compPipeline" name="components" value="Pipeline (pipeline.js)">
+                            <label for="compPipeline">Pipeline (pipeline.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compServer" name="components" value="Server (server.js)">
+                            <label for="compServer">Server (server.js)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compFrontend" name="components" value="Frontend (HTML/CSS)">
+                            <label for="compFrontend">Frontend (HTML/CSS)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="compTests" name="components" value="Tests & Demo">
+                            <label for="compTests">Tests & Demo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="section-title">📄 Description</div>
+
+                <div class="form-group">
+                    <label for="prDescription">What changed? *</label>
+                    <textarea id="prDescription" placeholder="Describe the changes..." required></textarea>
+                </div>
+
+                <!-- Features -->
+                <div class="section-title">✨ Features Added</div>
+
+                <div class="form-group">
+                    <label for="features">New features (one per line)</label>
+                    <textarea id="features" placeholder="e.g., Real-time price alerts&#10;Telegram bot integration&#10;User preferences saving"></textarea>
+                </div>
+
+                <!-- Improvements -->
+                <div class="section-title">🚀 Improvements</div>
+
+                <div class="form-group">
+                    <label for="improvements">Performance/quality improvements</label>
+                    <textarea id="improvements" placeholder="e.g., 40% faster search&#10;Reduced database size by 25%&#10;Better error handling"></textarea>
+                </div>
+
+                <!-- Breaking Changes -->
+                <div class="section-title">⚠️ Breaking Changes</div>
+
+                <div class="form-group">
+                    <label for="breaking">Any breaking changes?</label>
+                    <textarea id="breaking" placeholder="Leave empty if no breaking changes"></textarea>
+                </div>
+
+                <!-- Testing -->
+                <div class="section-title">🧪 Testing</div>
+
+                <div class="form-group">
+                    <label for="testing">How was this tested?</label>
+                    <textarea id="testing" placeholder="e.g., npm run demo:full&#10;npm run test:integration&#10;Manual testing on Windows"></textarea>
+                </div>
+
+                <!-- Status -->
+                <div class="section-title">✅ Status</div>
+
+                <div class="form-group">
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="statusReady" name="status" value="Ready for Review ✅" checked>
+                            <label for="statusReady">Ready for Review ✅</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="statusWIP" name="status" value="Work in Progress 🔄">
+                            <label for="statusWIP">Work in Progress 🔄</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="statusBlocked" name="status" value="Blocked 🚫">
+                            <label for="statusBlocked">Blocked 🚫</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button type="button" class="btn-generate" onclick="generatePR()">Generate PR</button>
+                    <button type="button" class="btn-clear" onclick="clearForm()">Clear</button>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-copy" onclick="copyToClipboard()">📋 Copy</button>
+                    <button type="button" class="btn-download" onclick="downloadPR()">⬇️ Download</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+            <h2>📋 Preview</h2>
+            <div class="preview-content" id="preview">Your PR description will appear here...</div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-set today's date
+        document.getElementById('prDate').valueAsDate = new Date();
+
+        function generatePR() {
+            const title = document.getElementById('prTitle').value;
+            const date = document.getElementById('prDate').value;
+            
+            if (!title) {
+                alert('⚠️ Please enter PR Title');
+                return;
+            }
+
+            // Get selected components
+            const components = Array.from(document.querySelectorAll('input[name="components"]:checked'))
+                .map(el => el.value);
+
+            const description = document.getElementById('prDescription').value;
+            const features = document.getElementById('features').value;
+            const improvements = document.getElementById('improvements').value;
+            const breaking = document.getElementById('breaking').value;
+            const testing = document.getElementById('testing').value;
+            const status = document.querySelector('input[name="status"]:checked').value;
+
+            // Build PR
+            let pr = `# ${title}\n\n`;
+            pr += `**Status:** ${status}\n`;
+            pr += `**Date:** ${date || new Date().toLocaleDateString()}\n\n`;
+
+            if (components.length > 0) {
+                pr += `## 🧩 Components Modified\n`;
+                components.forEach(comp => {
+                    pr += `- ${comp}\n`;
+                });
+                pr += '\n';
+            }
+
+            pr += `## 📝 Description\n${description}\n\n`;
+
+            if (features.trim()) {
+                pr += `## ✨ Features Added\n`;
+                features.split('\n').filter(f => f.trim()).forEach(feature => {
+                    pr += `- ${feature.trim()}\n`;
+                });
+                pr += '\n';
+            }
+
+            if (improvements.trim()) {
+                pr += `## 🚀 Improvements\n`;
+                improvements.split('\n').filter(i => i.trim()).forEach(imp => {
+                    pr += `- ${imp.trim()}\n`;
+                });
+                pr += '\n';
+            }
+
+            if (breaking.trim()) {
+                pr += `## ⚠️ Breaking Changes\n${breaking}\n\n`;
+            }
+
+            if (testing.trim()) {
+                pr += `## 🧪 Testing\n${testing}\n\n`;
+            }
+
+            pr += `---\n*Generated on ${new Date().toLocaleString()}*`;
+
+            document.getElementById('preview').textContent = pr;
+            document.getElementById('preview').dataset.prContent = pr;
+        }
+
+        function copyToClipboard() {
+            const content = document.getElementById('preview').dataset.prContent;
+            if (!content) {
+                alert('⚠️ Generate PR first');
+                return;
+            }
+            navigator.clipboard.writeText(content).then(() => {
+                const msg = document.getElementById('successMsg');
+                msg.style.display = 'block';
+                setTimeout(() => msg.style.display = 'none', 3000);
+            });
+        }
+
+        function downloadPR() {
+            const content = document.getElementById('preview').dataset.prContent;
+            const title = document.getElementById('prTitle').value;
+            if (!content) {
+                alert('⚠️ Generate PR first');
+                return;
+            }
+            
+            const filename = `PR_${title.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.md`;
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/markdown;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function clearForm() {
+            document.getElementById('prForm').reset();
+            document.getElementById('prDate').valueAsDate = new Date();
+            document.getElementById('preview').textContent = 'Your PR description will appear here...';
+            document.getElementById('preview').dataset.prContent = '';
+        }
+
+        // Auto-generate on Enter in textarea
+        document.getElementById('prDescription').addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                generatePR();
+            }
+        });
+    </script>
+</body>
+</html>

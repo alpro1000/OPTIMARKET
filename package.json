@@ -13,12 +13,20 @@
     "test:explanations": "node testExplanations.js",
     "test:valuecurve": "node testValueCurve.js",
     "test:apis": "node testAPIs.js",
-    "test:tires": "node runMVP_tires_example.js"
+    "test:tires": "node runMVP_tires_example.js",
+    "test:integration": "node testFullIntegration.js",
+    "demo:full": "node demoFullSystem.js",
+    "test:scraper": "node testProductFetcher.js",
+    "test:trustscore": "node testTrustScore.js",
+    "test:pricetracker": "node testPriceTracker.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^17.2.3",
-    "node-fetch": "^3.3.2"
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.2",
+    "sql.js": "^1.8.0",
+    "uuid": "^9.0.0"
   }
 }
