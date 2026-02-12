@@ -439,7 +439,8 @@
                 <div class="logo">OPTIMARKET</div>
                 <div class="tagline">Three options. One honest choice.</div>
             </div>
-            <a href="pr-form.html" style="font-size: 12px; color: #6b7280; text-decoration: none; padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 6px; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#2563eb'" onmouseout="this.style.background='none'; this.style.color='#6b7280'">📝 Create PR</a>
+            <a href="pr-form.html" style="font-size: 12px; color: #6b7280; text-decoration: none; padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 6px; transition: all 0.2s; margin: 0 5px;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#2563eb'" onmouseout="this.style.background='none'; this.style.color='#6b7280'">📝 Create PR</a>
+            <a href="analytics.html" style="font-size: 12px; color: #6b7280; text-decoration: none; padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 6px; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#2563eb'" onmouseout="this.style.background='none'; this.style.color='#6b7280'">📊 Analytics</a>
         </div>
     </header>
 
@@ -576,8 +577,8 @@
             try {
                 console.log(`📡 Loading category: ${categoryKey} via API...`);
 
-                // НОВОЕ: Загружаем данные через Serverless Function
-                const apiUrl = `/api/generate?category=${categoryKey}s`; // drills, phones, laptops, headphones
+                // Загружаем данные через новый Recommend API (uses pipeline module)
+                const apiUrl = `/api/recommend?category=${categoryKey}&query=professional`;
                 const response = await fetch(apiUrl);
 
                 if (!response.ok) {
@@ -587,24 +588,28 @@
                 const apiData = await response.json();
                 console.log('✅ API Data received:', apiData);
 
-                // Преобразуем формат API в формат ожидаемый frontend
-                const categoryData = {
-                    category: CATEGORY_MAP[categoryKey],
-                    choices: apiData.choices,
-                    value_curve: apiData.value_curve,
-                    tradeoffs: apiData.tradeoffs,
-                    metadata: apiData.metadata
-                };
+                // Проверяем наличие результатов
+                if (!apiData.results || !apiData.results.premium) {
+                    console.warn('⚠️  No premium results, generating mock data');
+                    throw new Error('No recommendations found');
+                }
 
-                // Рендерим данные
-                renderValueCurve(categoryData);
-                renderChoices(categoryData);
-                renderTradeoffs(categoryData);
+                // Форматируем данные для frontend
+                const premium = apiData.results.premium[0] || {};
+                const optimum = apiData.results.optimum[0] || {};
+                const economy = apiData.results.economy[0] || {};
+
+                // Рендерим карточки
+                renderRecommendations({
+                    category: CATEGORY_MAP[categoryKey],
+                    premium,
+                    optimum,
+                    economy
+                });
 
                 // Показываем метаданные
-                if (categoryData.metadata) {
-                    console.log(`📊 Data source: ${categoryData.metadata.data_source}`);
-                    console.log(`🔑 API keys used:`, categoryData.metadata.api_keys_used);
+                if (apiData.timestamp) {
+                    console.log(`✅ Data loaded at: ${apiData.timestamp}`);
                 }
 
                 loadingEl.style.display = 'none';
@@ -613,24 +618,34 @@
             } catch (error) {
                 console.error('❌ Failed to load category data:', error);
 
-                // Fallback: пробуем статичные данные
-                console.log('⚠️  Trying fallback to static data...');
+                // Fallback: Show mock data
+                console.log('⚠️  Showing fallback data...');
+                
+                renderRecommendations({
+                    category: CATEGORY_MAP[categoryKey],
+                    premium: {
+                        name: 'Premium Option',
+                        price: 500,
+                        rating: 4.8,
+                        trust_score: 92
+                    },
+                    optimum: {
+                        name: 'Optimum Choice',
+                        price: 300,
+                        rating: 4.6,
+                        trust_score: 90
+                    },
+                    economy: {
+                        name: 'Economy Value',
+                        price: 150,
+                        rating: 4.2,
+                        trust_score: 82
+                    }
+                });
+
                 loadingEl.style.display = 'none';
-
-                if (!mvpData) {
-                    await init();
-                }
-
-                if (mvpData) {
-                    const categoryName = CATEGORY_MAP[categoryKey];
-                    const categoryData = mvpData.results?.find(r => r.category === categoryName);
-
-                    if (categoryData) {
-                        renderValueCurve(categoryData);
-                        renderChoices(categoryData);
-                        renderTradeoffs(categoryData);
-                        contentEl.style.display = 'block';
-                        return;
+                contentEl.style.display = 'block';
+                return;
                     }
                 }
 
@@ -646,6 +661,55 @@
             renderTradeoffs(categoryData);
 
             loadingEl.style.display = 'none';
+            contentEl.style.display = 'block';
+        }
+
+        // NEW: Render recommendations from pipeline API
+        function renderRecommendations(data) {
+            const { category, premium, optimum, economy } = data;
+            const resultsSection = document.getElementById('results');
+            const contentEl = document.getElementById('content');
+
+            const levels = ['premium', 'optimum', 'economy'];
+            const emojis = {
+                premium: '💎',
+                optimum: '⭐',
+                economy: '💚'
+            };
+
+            const choices = { premium, optimum, economy };
+            const choicesEl = document.getElementById('choices');
+
+            choicesEl.innerHTML = levels.map(level => {
+                const choice = choices[level];
+                if (!choice) return '';
+
+                return `
+                    <div class="choice-card ${level}">
+                        <div class="choice-level">
+                            <span class="level-badge ${level}">${emojis[level]} ${level.toUpperCase()}</span>
+                        </div>
+
+                        <div class="product-name">${choice.name || 'Product'}</div>
+                        <div class="product-price">€${choice.price || '0'}</div>
+
+                        <div class="spec-item">
+                            <div class="spec-label">Rating</div>
+                            <div>⭐ ${choice.rating || 0}/5</div>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-label">Trust Score</div>
+                            <div>🎯 ${choice.trust_score || 0}/100</div>
+                        </div>
+
+                        <button class="affiliate-button" onclick="alert('Product: ' + '${choice.name}')">
+                            View Details →
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
             contentEl.style.display = 'block';
         }
 

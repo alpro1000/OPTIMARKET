@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import { load } from "cheerio";
 import { v4 as uuidv4 } from "uuid";
 import db from "./database.js";
+import ozonParser from "./ozonParser.js";
 
 class ProductFetcher {
   constructor() {
@@ -218,6 +219,13 @@ class ProductFetcher {
   async fetchProductsForCategory(category, useRealScraping = false) {
     console.log(`\n🔄 Started fetching products for category: ${category}`);
 
+    // NEW: Try Ozon first (real products with analytics)
+    const ozonProducts = await ozonParser.getProductsWithFallback(category);
+    if (ozonProducts.length > 5) {
+      console.log(`✅ Using Ozon products (${ozonProducts.length} items)`);
+      return ozonProducts;
+    }
+
     if (useRealScraping) {
       const amazonProducts = await this.fetchAmazonProducts(
         category,
@@ -228,11 +236,14 @@ class ProductFetcher {
         category
       );
 
-      return [...amazonProducts, ...heurekaProducts];
-    } else {
-      // По умолчанию используем mock для быстрого тестирования
-      return await this.generateMockProducts(category, 20);
+      if ([...amazonProducts, ...heurekaProducts].length > 0) {
+        return [...amazonProducts, ...heurekaProducts];
+      }
     }
+
+    // Fallback: mock data
+    console.log(`⚠️  No real products found, using mock data`);
+    return await this.generateMockProducts(category, 20);
   }
 
   // === СОХРАНЕНИЕ В БД ===

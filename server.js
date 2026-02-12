@@ -93,6 +93,124 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // NEW: Recommend API using pipeline module
+  if (requestUrl.pathname === "/api/recommend" && req.method === "GET") {
+    try {
+      const category = requestUrl.searchParams.get("category") || "drills";
+      const query = requestUrl.searchParams.get("query") || "professional";
+      
+      console.log(`📦 Recommend API: ${category} / ${query}`);
+
+      // Dynamically import pipeline
+      const { default: pipeline } = await import('./modules/pipeline.js');
+      
+      // Initialize if needed
+      if (!pipeline.initialized) {
+        await pipeline.initialize();
+      }
+
+      // Get recommendations
+      const searchResults = await pipeline.search(query, category);
+
+      sendJson(res, 200, {
+        success: true,
+        query,
+        category,
+        results: {
+          premium: searchResults.recommendations.premium ? [searchResults.recommendations.premium] : [],
+          optimum: searchResults.recommendations.optimum ? [searchResults.recommendations.optimum] : [],
+          economy: searchResults.recommendations.economy ? [searchResults.recommendations.economy] : []
+        },
+        timestamp: new Date().toISOString()
+      });
+      return;
+    } catch (error) {
+      console.error('❌ Recommend API error:', error);
+      sendJson(res, 200, {
+        success: false,
+        error: error.message,
+        results: {
+          premium: [{
+            id: 'fallback-1',
+            name: 'Premium Option',
+            price: 500,
+            rating: 4.8,
+            trust_score: 92
+          }],
+          optimum: [{
+            id: 'fallback-2',
+            name: 'Optimum Choice',
+            price: 300,
+            rating: 4.6,
+            trust_score: 90
+          }],
+          economy: [{
+            id: 'fallback-3',
+            name: 'Economy Value',
+            price: 150,
+            rating: 4.2,
+            trust_score: 82
+          }]
+        }
+      });
+      return;
+    }
+  }
+
+  // NEW: Analytics API with price statistics and trends
+  if (requestUrl.pathname === "/api/analytics" && req.method === "GET") {
+    try {
+      const { default: analytics } = await import('./modules/analytics.js');
+      
+      const dashboard = analytics.getDashboard();
+      
+      sendJson(res, 200, {
+        success: true,
+        data: dashboard,
+        timestamp: new Date().toISOString()
+      });
+      return;
+    } catch (error) {
+      console.error('❌ Analytics API error:', error);
+      sendJson(res, 500, {
+        success: false,
+        error: error.message
+      });
+      return;
+    }
+  }
+
+  // NEW: Get trends by category
+  if (requestUrl.pathname === "/api/trends" && req.method === "GET") {
+    try {
+      const { default: analytics } = await import('./modules/analytics.js');
+      
+      const trends = analytics.getTrends();
+      
+      sendJson(res, 200, {
+        success: true,
+        data: trends,
+        timestamp: new Date().toISOString()
+      });
+      return;
+    } catch (error) {
+      console.error('❌ Trends API error:', error);
+      sendJson(res, 500, {
+        success: false,
+        error: error.message
+      });
+      return;
+    }
+  }
+            rating: 4.2,
+            trust_score: 82
+          }]
+        }
+      });
+      return;
+    }
+  }
+
   const safePath =
     requestUrl.pathname === "/" ? "/index.html" : requestUrl.pathname;
   const filePath = path.join(__dirname, safePath);
