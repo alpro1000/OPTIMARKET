@@ -1,4 +1,4 @@
-// Vercel Serverless Function: Generate product recommendations
+// Vercel Serverless Function: Generate product recommendations with Redis caching
 // api/generate.js
 
 import { fetchReviewSnippets } from '../modules/perplexity.js';
@@ -6,6 +6,31 @@ import { extractSignals } from '../modules/reviewSignals.js';
 import { calculateValueCurve, explainValueCurve } from '../modules/valueCurve.js';
 import { generateAllExplanations } from '../modules/explanations.js';
 import { fetchAwinProducts } from '../modules/shopParser.js';
+import { createClient } from 'redis';
+
+// Redis client (singleton pattern для Vercel Serverless)
+let redisClient = null;
+
+async function getRedisClient() {
+  if (redisClient) return redisClient;
+
+  const REDIS_URL = process.env.REDIS_URL;
+  if (!REDIS_URL) {
+    console.log('⚠️  REDIS_URL not set, caching disabled');
+    return null;
+  }
+
+  try {
+    redisClient = createClient({ url: REDIS_URL });
+    redisClient.on('error', (err) => console.error('Redis Client Error:', err));
+    await redisClient.connect();
+    console.log('✅ Redis connected');
+    return redisClient;
+  } catch (error) {
+    console.error('❌ Redis connection failed:', error.message);
+    return null;
+  }
+}
 
 // Маппинг категорий на Awin advertiser IDs (нужно заполнить после регистрации)
 const AWIN_ADVERTISERS = {
@@ -20,8 +45,30 @@ const AWIN_ADVERTISERS = {
 export default async function handler(req, res) {
   const { category = 'tires' } = req.query;
 
+  // Cache key: category + date (обновляется 1 раз в день)
+  const cacheKey = `reco:${category}:${new Date().toISOString().split('T')[0]}`;
+
   try {
     console.log(`🔧 Generating recommendations for: ${category}`);
+
+    // 1. Проверяем кэш
+    const redis = await getRedisClient();
+    if (redis) {
+      try {
+        const cached = await redis.get(cacheKey);
+        if (cached) {
+          console.log(`✅ Cache HIT for ${cacheKey}`);
+          const result = JSON.parse(cached);
+          result.metadata.cached = true;
+          result.metadata.cache_key = cacheKey;
+          return res.status(200).json(result);
+        }
+        console.log(`⚠️  Cache MISS for ${cacheKey}`);
+      } catch (cacheError) {
+        console.error('❌ Cache read error:', cacheError.message);
+        // Continue without cache
+      }
+    }
 
     // 1. Получаем товары через Awin Product Feed API
     const advertiserId = AWIN_ADVERTISERS[category];
@@ -89,7 +136,19 @@ export default async function handler(req, res) {
       }
     };
 
-    // Cache для снижения API costs (в production добавить Redis)
+    // 7. Сохраняем в кэш (TTL: 24 часа)
+    if (redis) {
+      try {
+        const TTL_SECONDS = 24 * 60 * 60; // 24 hours
+        await redis.setEx(cacheKey, TTL_SECONDS, JSON.stringify(result));
+        console.log(`✅ Cached result for ${cacheKey} (TTL: ${TTL_SECONDS}s)`);
+      } catch (cacheError) {
+        console.error('❌ Cache write error:', cacheError.message);
+        // Continue anyway
+      }
+    }
+
+    // 8. Возвращаем результат
     res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
     res.status(200).json(result);
 
