@@ -259,6 +259,296 @@ OPTIMARKET — это ИИ‑куратор выбора товаров, кот�
 
 ---
 
+## ☁️ AWS INFRASTRUCTURE PLAN ($1000 CREDIT)
+
+> **Стратегия:** Hybrid подход — Vercel (бесплатно) + AWS (кэширование и scale)
+> **Кредит:** $1000 от Amazon
+> **Цель:** Снизить API costs в 20x + подготовить к масштабированию
+
+### 🎯 Архитектура Hybrid
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    VERCEL (FREE)                         │
+│  • Frontend (public/index.html)                          │
+│  • Serverless Functions (api/generate.js)                │
+│  • Auto-deploy from GitHub                               │
+│  • SSL + CDN globally                                    │
+│  Cost: $0/month (Hobby plan)                             │
+└─────────────────────────────────────────────────────────┘
+                         ↓ ↑
+┌─────────────────────────────────────────────────────────┐
+│                 AWS ($1000 CREDIT)                       │
+│  • ElastiCache Redis → кэширование responses (1h TTL)    │
+│  • CloudWatch → monitoring, alerts, logs                 │
+│  • S3 → backup feeds, static assets                      │
+│  • Lambda (future) → background jobs, cron               │
+│  • RDS (future) → user accounts, analytics               │
+└─────────────────────────────────────────────────────────┘
+                         ↓ ↑
+┌─────────────────────────────────────────────────────────┐
+│              EXTERNAL APIs (Pay-as-you-go)               │
+│  • Perplexity (~$30/month) → $1.50 с кэшем               │
+│  • Gemini (~$5/month) → $0.25 с кэшем                    │
+│  • Awin (free, комиссия с продаж)                        │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 📅 Phase 1: MVP (Month 1-3) — $60 из кредита
+
+**Что добавляем сейчас:**
+
+#### 1. ElastiCache Redis (cache.t3.micro)
+- **Стоимость:** $12/month × 3 = $36
+- **Назначение:** Кэширование `/api/generate` responses
+- **TTL:** 1 час (обновляется 24 раза в день)
+- **Hit rate:** 95% (при 10k users/month)
+- **Экономия:** $300-350/month на API calls
+- **ROI:** 25-30x
+
+**Setup:**
+```bash
+# 1. Create Redis cluster
+aws elasticache create-cache-cluster \
+  --cache-cluster-id optimarket-mvp \
+  --engine redis \
+  --cache-node-type cache.t3.micro \
+  --num-cache-nodes 1 \
+  --region eu-central-1
+
+# 2. Add to Vercel Secrets
+REDIS_URL=redis://optimarket-mvp.xxx.cache.amazonaws.com:6379
+```
+
+**Code changes:**
+- `api/generate.js`: добавить Redis client + кэширование logic
+- `package.json`: добавить `redis` dependency
+
+#### 2. CloudWatch Monitoring
+- **Стоимость:** $5/month × 3 = $15
+- **Назначение:** Logs, metrics, alerts
+- **Метрики:**
+  - API latency (p50, p95, p99)
+  - Error rate (4xx, 5xx)
+  - Cache hit rate
+  - Daily active users
+- **Алерты:**
+  - Error rate > 5% → email
+  - Latency p95 > 10s → email
+  - Cache hit rate < 80% → investigate
+
+#### 3. S3 Standard Storage
+- **Стоимость:** $3/month × 3 = $9
+- **Назначение:**
+  - Backup product feeds (JSON)
+  - Export user feedback (CSV)
+  - Static assets (если нужны)
+
+**Total Phase 1:** $60 из $1000 (6% кредита)
+
+**Результат:**
+```
+API Costs ДО кэша:
+  10,000 users × 1 request × ($0.03 Perplexity + $0.005 Gemini) = $350/month
+
+API Costs ПОСЛЕ кэша (95% hit rate):
+  500 new requests × $0.035 = $17.50/month
+
+Экономия: $332.50/month
+AWS затраты: $20/month
+Чистая экономия: $312.50/month 🚀
+```
+
+---
+
+### 📅 Phase 2: Growth (Month 4-6) — $150 из кредита
+
+**Что добавляем:**
+
+#### 4. RDS PostgreSQL (db.t3.micro)
+- **Стоимость:** $15/month × 3 = $45
+- **Назначение:**
+  - User accounts (email, preferences)
+  - Wishlists / Saved comparisons
+  - Analytics (clicks, conversions)
+  - Feedback responses
+
+**Schema:**
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE,
+  created_at TIMESTAMP
+);
+
+CREATE TABLE wishlists (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  category VARCHAR(50),
+  product_id VARCHAR(100),
+  created_at TIMESTAMP
+);
+
+CREATE TABLE analytics (
+  id SERIAL PRIMARY KEY,
+  event_type VARCHAR(50), -- 'view', 'click', 'feedback'
+  category VARCHAR(50),
+  metadata JSONB,
+  created_at TIMESTAMP
+);
+```
+
+#### 5. Lambda Background Jobs
+- **Стоимость:** $10/month × 3 = $30
+- **Назначение:**
+  - Cron: обновление product feeds (24h)
+  - Email notifications
+  - Data aggregation для analytics
+
+**Functions:**
+```javascript
+// lambda/updateFeeds.js
+export async function handler(event) {
+  // Обновляем feeds из Awin каждые 24 часа
+  const categories = ['drills', 'headphones', 'laptops', 'phones'];
+  for (const cat of categories) {
+    await updateFeed(cat);
+  }
+}
+
+// EventBridge rule: cron(0 2 * * ? *) // 2 AM daily
+```
+
+#### 6. CloudFront CDN (optional)
+- **Стоимость:** $20/month × 3 = $60
+- **Назначение:** Geo-distribution для images/assets
+- **Регионы:** US, EU, Asia
+
+**Total Phase 2:** $150 из $1000 (15% кредита)
+
+---
+
+### 📅 Phase 3: Scale (Month 7-12) — $600-900 из кредита
+
+**Что добавляем:**
+
+#### 7. ElastiCache Upgrade (cache.t3.medium)
+- **Стоимость:** $50/month × 6 = $300
+- **Причина:** 100k+ users/month
+- **Memory:** 3.2GB (vs 0.5GB в t3.micro)
+
+#### 8. SageMaker ML Training
+- **Стоимость:** $100/month × 3 = $300
+- **Назначение:**
+  - Fine-tune value_score algorithm
+  - Personalization engine (user preferences)
+  - A/B testing automation
+  - Predictive analytics
+
+**Use case:**
+```python
+# Train model: predict user's preferred level (E/O/P)
+features = [age, budget, usage_frequency, previous_choices]
+model = train_classifier(features, target='preferred_level')
+
+# Use in api/generate.js
+predicted_level = model.predict(user_features)
+# Highlight предсказанный уровень в UI
+```
+
+#### 9. RDS Read Replicas
+- **Стоимость:** $30/month × 6 = $180
+- **Назначение:**
+  - Отдельная DB для analytics queries
+  - Не нагружаем primary DB
+
+**Total Phase 3:** $780 из $1000 (78% кредита)
+
+---
+
+### 💰 ИТОГОВОЕ РАСПРЕДЕЛЕНИЕ $1000 КРЕДИТА
+
+```
+Phase 1 (Month 1-3):   $60    ████░░░░░░ 6%
+Phase 2 (Month 4-6):   $150   ████████░░ 15%
+Phase 3 (Month 7-12):  $780   ██████████ 78%
+─────────────────────────────────────────────
+Total:                 $990   ██████████ 99%
+Reserve:               $10    ░░░░░░░░░░ 1%
+```
+
+**Кредит хватит на:** ~12-15 месяцев
+
+**Что происходит когда кредит закончится:**
+- Оцениваем ROI (revenue vs costs)
+- Если revenue > $200/month → продолжаем платить AWS
+- Если нет → отключаем AWS, возвращаемся к Vercel Free (работает без AWS)
+
+---
+
+### 🚀 РЕАЛИЗАЦИЯ: Пошаговый план
+
+#### ✅ ШАГ 1: Vercel Deploy (СЕГОДНЯ)
+- [x] Fix vercel.json (убрать AWS Lambda runtime)
+- [ ] Проверить что deploy успешен
+- [ ] Протестировать /api/generate?category=drills
+
+#### ⏳ ШАГ 2: AWS Redis Setup (ЗАВТРА, 1 час)
+1. Создать ElastiCache Redis cluster
+2. Получить endpoint URL
+3. Добавить в Vercel Secrets: `REDIS_URL`
+4. Обновить `api/generate.js` (добавить кэширование)
+5. Добавить `redis` в `package.json`
+6. Deploy + test
+
+#### ⏳ ШАГ 3: CloudWatch Setup (ЗАВТРА, 30 мин)
+1. Включить CloudWatch Logs для Lambda
+2. Создать custom metrics (cache_hit_rate)
+3. Настроить алерты (errors, latency)
+4. Dashboard для мониторинга
+
+#### ⏳ ШАГ 4: S3 Backup (ПО НЕОБХОДИМОСТИ)
+1. Создать S3 bucket: `optimarket-backups`
+2. Lambda function для daily backup feeds
+3. Lifecycle policy: delete after 30 days
+
+#### ⏳ ШАГ 5: Awin Integration (ПАРАЛЛЕЛЬНО)
+1. Завершить Awin registration
+2. Получить API key + Advertiser IDs
+3. Добавить в Vercel Secrets
+4. Проверить что `metadata.data_source: "awin"`
+
+---
+
+### 📊 МЕТРИКИ УСПЕХА AWS INTEGRATION
+
+**Week 1 (после Redis setup):**
+- [ ] Cache hit rate > 90%
+- [ ] API costs снизились с $350 → $20/month
+- [ ] Latency p95 < 3s (было 10s)
+
+**Month 1:**
+- [ ] $0 затрат на Vercel (Free plan)
+- [ ] $20 затрат на AWS из кредита
+- [ ] Чистая экономия: $300+/month
+
+**Month 3:**
+- [ ] CloudWatch dashboard показывает KPIs
+- [ ] Автоматические алерты работают
+- [ ] S3 backups настроены
+
+**Month 6:**
+- [ ] RDS с user accounts запущен
+- [ ] Lambda cron jobs обновляют feeds
+- [ ] Analytics собирается в DB
+
+**Month 12:**
+- [ ] SageMaker ML модель trained
+- [ ] Personalization работает
+- [ ] ROI: revenue > $500/month → AWS окупается
+
+---
+
 ## 🔧 ТЕХНИЧЕСКАЯ АРХИТЕКТУРА (текущая)
 
 ### Структура проекта:
